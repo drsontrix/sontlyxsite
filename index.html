@@ -1,0 +1,6868 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sontlyx Network</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#03060d;
+    --bg2:#07101e;
+
+    --p:#38bdf8;
+    --p2:#0ea5e9;
+    --p3:#6366f1;
+    --cyan:#22d3ee;
+
+    --green:#34d399;
+    --red:#ef4444;
+    --yellow:#facc15;
+    --purple:#a78bfa;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --line:rgba(255,255,255,.09);
+
+    --card:rgba(7,14,28,.72);
+
+    --mx:50%;
+    --my:50%;
+
+    /* Premium mini-dot cursor */
+    --cursor: none;
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+
+    color:var(--text);
+
+    font-family:Inter,Arial,sans-serif;
+
+    overflow-x:hidden;
+
+    cursor:none;
+
+    background:
+        radial-gradient(
+            900px circle at var(--mx) var(--my),
+            rgba(14,165,233,.10),
+            transparent 45%
+        ),
+        radial-gradient(
+            800px circle at 10% 20%,
+            rgba(99,102,241,.12),
+            transparent 55%
+        ),
+        radial-gradient(
+            900px circle at 90% 80%,
+            rgba(34,211,238,.07),
+            transparent 55%
+        ),
+        linear-gradient(
+            135deg,
+            #02040a,
+            #050b17 50%,
+            #02040a
+        );
+
+    background-attachment:fixed;
+}
+
+/* Tıklanabilir yerlerde de büyük cursor */
+
+a,
+button,
+input,
+textarea,
+label,
+select,
+.acc-h,
+.tab{
+    cursor:none;
+}
+
+::selection{
+    background:rgba(56,189,248,.3);
+    color:#fff;
+}
+
+
+/* =========================================================
+   FULL SCREEN ATMOSPHERE
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+
+    inset:-20%;
+
+    z-index:-5;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(14,165,233,.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 60%,
+            rgba(99,102,241,.11),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(34,211,238,.06),
+            transparent 30%
+        );
+
+    filter:blur(70px);
+
+    animation:
+        atmosphere 16s ease-in-out infinite alternate;
+}
+
+
+/*
+    ÖNEMLİ:
+    Eski kare şeklindeki hero efektlerini kaldırdık.
+
+    Artık herhangi bir:
+    square
+    rectangle
+    grid block
+    keskin kutu
+
+    görünmeyecek.
+*/
+
+body::after{
+    content:"";
+
+    position:fixed;
+
+    inset:-50%;
+
+    z-index:-6;
+
+    pointer-events:none;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent 0deg,
+            rgba(56,189,248,.035) 80deg,
+            transparent 150deg,
+            rgba(99,102,241,.035) 230deg,
+            transparent 300deg
+        );
+
+    filter:blur(80px);
+
+    animation:worldSpin 35s linear infinite;
+}
+
+
+/* =========================================================
+   ULTRA PREMIUM MOVING BACKGROUND
+========================================================= */
+
+#ambient{
+    position:fixed;
+    inset:0;
+    z-index:-4;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.aurora{
+    position:absolute;
+    width:48vw;
+    height:48vw;
+    min-width:420px;
+    min-height:420px;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.17;
+    mix-blend-mode:screen;
+    will-change:transform;
+}
+
+.aurora.a1{
+    left:-14vw;
+    top:8vh;
+    background:radial-gradient(circle, rgba(14,165,233,.72), transparent 66%);
+    animation:auroraOne 18s ease-in-out infinite alternate;
+}
+
+.aurora.a2{
+    right:-16vw;
+    top:20vh;
+    background:radial-gradient(circle, rgba(99,102,241,.72), transparent 66%);
+    animation:auroraTwo 22s ease-in-out infinite alternate;
+}
+
+.aurora.a3{
+    left:24vw;
+    bottom:-28vw;
+    background:radial-gradient(circle, rgba(34,211,238,.58), transparent 66%);
+    animation:auroraThree 25s ease-in-out infinite alternate;
+}
+
+.aurora.a4{
+    left:42vw;
+    top:-32vw;
+    background:radial-gradient(circle, rgba(129,140,248,.5), transparent 66%);
+    animation:auroraFour 20s ease-in-out infinite alternate;
+}
+
+#ambient::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(ellipse at center, transparent 28%, rgba(0,0,0,.24) 78%, rgba(0,0,0,.5)),
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size:auto, 80px 80px, 80px 80px;
+    mask-image:linear-gradient(to bottom, black, transparent 92%);
+    opacity:.35;
+}
+
+#ambient::after{
+    content:"";
+    position:absolute;
+    inset:-20%;
+    background:conic-gradient(from 90deg at 50% 50%, transparent, rgba(56,189,248,.045), transparent 25%, rgba(129,140,248,.04), transparent 55%);
+    filter:blur(35px);
+    animation:ambientSpin 32s linear infinite;
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+#particles{
+    position:fixed;
+
+    inset:0;
+
+    z-index:-3;
+
+    pointer-events:none;
+
+    opacity:.88;
+}
+
+
+/* =========================================================
+   PREMIUM MINI CURSOR
+========================================================= */
+
+#cursorDot,
+#cursorRing{
+    position:fixed;
+    left:0;
+    top:0;
+    pointer-events:none;
+    z-index:100000;
+    opacity:0;
+}
+
+#cursorDot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ffffff;
+    box-shadow:
+        0 0 8px rgba(255,255,255,.95),
+        0 0 18px rgba(56,189,248,.95),
+        0 0 34px rgba(99,102,241,.55);
+    transform:translate(-50%,-50%);
+}
+
+#cursorRing{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    border:1px solid rgba(125,211,252,.72);
+    background:radial-gradient(circle, rgba(56,189,248,.05), transparent 65%);
+    box-shadow:
+        inset 0 0 12px rgba(56,189,248,.08),
+        0 0 20px rgba(56,189,248,.12);
+    transform:translate(-50%,-50%);
+    transition:
+        width .18s ease,
+        height .18s ease,
+        border-color .18s ease,
+        opacity .2s ease;
+}
+
+body.cursor-hover #cursorRing{
+    width:38px;
+    height:38px;
+    border-color:rgba(129,140,248,.9);
+    box-shadow:
+        inset 0 0 18px rgba(99,102,241,.10),
+        0 0 28px rgba(99,102,241,.22);
+}
+
+body.cursor-hover #cursorDot{
+    transform:translate(-50%,-50%) scale(.75);
+}
+
+@media (hover:none),(pointer:coarse){
+    #cursorDot,#cursorRing{display:none!important}
+    body, a, button, input, textarea, label, select, .acc-h, .tab{cursor:auto!important}
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+#loader{
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#02040a;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+#loader.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.loader-logo{
+    font-family:Orbitron,sans-serif;
+
+    font-size:
+        clamp(
+            38px,
+            8vw,
+            80px
+        );
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #38bdf8,
+            #818cf8,
+            #fff
+        );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:
+        gradientMove 3s linear infinite;
+}
+
+.loader-ring{
+    width:56px;
+    height:56px;
+
+    margin-top:28px;
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        rgba(255,255,255,.08);
+
+    border-top-color:var(--p);
+
+    border-right-color:var(--p3);
+
+    box-shadow:
+        0 0 35px
+        rgba(56,189,248,.25);
+
+    animation:spin .8s linear infinite;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    position:fixed;
+
+    top:10px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:
+        min(
+            1180px,
+            calc(100% - 24px)
+        );
+
+    min-height:64px;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:
+        8px 12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:22px;
+
+    background:
+        rgba(3,7,18,.67);
+
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
+
+    box-shadow:
+        0 20px 70px
+        rgba(0,0,0,.42),
+
+        inset
+        0 1px
+        rgba(255,255,255,.06);
+
+    transition:.4s ease;
+}
+
+header.scrolled{
+    top:6px;
+
+    background:
+        rgba(3,7,18,.88);
+
+    border-color:
+        rgba(56,189,248,.18);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.55);
+}
+
+.logo{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    text-decoration:none;
+
+    font-family:Orbitron,sans-serif;
+
+    font-weight:900;
+
+    font-size:15px;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+}
+
+.logo img{
+    width:40px;
+    height:40px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+    box-shadow:
+        0 0 25px
+        rgba(56,189,248,.28);
+
+    transition:.4s ease;
+}
+
+.logo:hover img{
+    transform:
+        rotate(-6deg)
+        scale(1.08);
+
+    box-shadow:
+        0 0 35px
+        rgba(56,189,248,.5);
+}
+
+.logo span{
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #38bdf8,
+            #818cf8
+        );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:
+        gradientMove 5s linear infinite;
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+nav{
+    display:flex;
+    align-items:center;
+}
+
+nav ul{
+    display:flex;
+
+    align-items:center;
+
+    gap:3px;
+
+    list-style:none;
+}
+
+nav a{
+    position:relative;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        10px 12px;
+
+    border-radius:12px;
+
+    color:#94a3b8;
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    transition:.3s ease;
+}
+
+nav a::after{
+    content:"";
+
+    position:absolute;
+
+    bottom:4px;
+    left:50%;
+
+    width:0;
+    height:2px;
+
+    transform:translateX(-50%);
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p),
+            var(--p3)
+        );
+
+    box-shadow:
+        0 0 12px
+        var(--p);
+
+    transition:.3s ease;
+}
+
+nav a:hover,
+nav a.active{
+    color:#fff;
+
+    background:
+        rgba(56,189,248,.07);
+}
+
+nav a:hover::after,
+nav a.active::after{
+    width:50%;
+}
+
+
+/* =========================================================
+   HEADER ACCOUNT
+========================================================= */
+
+.hr{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+}
+
+.up{
+    display:none;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        5px 9px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.up.on{
+    display:flex;
+}
+
+.up img{
+    width:31px;
+    height:31px;
+
+    border-radius:8px;
+
+    border:
+        1px solid
+        rgba(56,189,248,.4);
+}
+
+.up span{
+    color:#bae6fd;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+.hb{
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    padding:
+        9px 13px;
+
+    border-radius:11px;
+
+    border:
+        1px solid
+        rgba(56,189,248,.3);
+
+    background:
+        rgba(56,189,248,.08);
+
+    color:var(--p);
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    transition:.3s ease;
+}
+
+.hb.on{
+    display:inline-flex;
+}
+
+.hb:hover{
+    color:#03111b;
+
+    background:var(--p);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(56,189,248,.3);
+}
+
+.hb.g{
+    color:var(--green);
+
+    border-color:
+        rgba(52,211,153,.3);
+
+    background:
+        rgba(52,211,153,.08);
+}
+
+.hb.g:hover{
+    background:var(--green);
+}
+
+.hb.red{
+    color:#fca5a5;
+
+    border-color:
+        rgba(239,68,68,.3);
+
+    background:
+        rgba(239,68,68,.08);
+}
+
+.hb.red:hover{
+    color:#fff;
+
+    background:var(--red);
+}
+
+
+/* Kartlar premium kalır ama imleci takip ederek dönmez. */
+.card, .staff-card, .server-card{
+    transform-style:preserve-3d;
+    will-change:transform;
+}
+
+.card:hover, .staff-card:hover, .server-card:hover{
+    transform:translateY(-5px);
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+    display:none;
+
+    min-height:100vh;
+
+    padding:
+        120px
+        0
+        90px;
+
+    position:relative;
+
+    z-index:1;
+
+    animation:
+        pageIn .65s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.page.active{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+
+    width:100%;
+
+    min-height:
+        650px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:
+        40px 20px;
+}
+
+
+/*
+    Hero'daki kare efekti YOK.
+    Sadece tam ekran yumuşak ışık.
+*/
+
+.hero-light{
+    position:absolute;
+
+    width:900px;
+    height:900px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(14,165,233,.13),
+            rgba(99,102,241,.07) 30%,
+            transparent 68%
+        );
+
+    filter:blur(40px);
+
+    pointer-events:none;
+
+    animation:
+        heroLight 10s
+        ease-in-out
+        infinite alternate;
+}
+
+.hero-light.two{
+    width:700px;
+    height:700px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(99,102,241,.10),
+            transparent 68%
+        );
+
+    animation-delay:
+        -4s;
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.badge{
+    position:relative;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:
+        8px 15px;
+
+    border:
+        1px solid
+        rgba(56,189,248,.22);
+
+    border-radius:999px;
+
+    background:
+        rgba(56,189,248,.06);
+
+    color:#bae6fd;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    box-shadow:
+        0 0 35px
+        rgba(56,189,248,.06);
+
+    animation:
+        badgeFloat 3s
+        ease-in-out
+        infinite;
+}
+
+.badge::before{
+    content:"";
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 15px
+        var(--green);
+
+    animation:pulse 1.5s infinite;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero h1{
+    position:relative;
+
+    margin-top:25px;
+
+    max-width:
+        1000px;
+
+    font-family:
+        Orbitron,
+        sans-serif;
+
+    font-size:
+        clamp(
+            45px,
+            7vw,
+            90px
+        );
+
+    line-height:.98;
+
+    font-weight:900;
+
+    letter-spacing:-4px;
+
+    background:
+        linear-gradient(
+            105deg,
+            #ffffff,
+            #ffffff 25%,
+            #8b8ff7 48%,
+            #72d7ff 68%,
+            #ffffff
+        );
+
+    background-size:250%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:
+        gradientMove 7s
+        linear infinite;
+}
+
+.hero p{
+    position:relative;
+
+    max-width:700px;
+
+    margin-top:25px;
+
+    color:#94a3b8;
+
+    font-size:16px;
+
+    line-height:1.8;
+}
+
+.hero-buttons{
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:32px;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn{
+    position:relative;
+
+    overflow:hidden;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    min-height:46px;
+
+    padding:
+        0 20px;
+
+    border:none;
+
+    border-radius:13px;
+
+    color:#03111b;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7dd3fc,
+            #38bdf8,
+            #818cf8
+        );
+
+    font-size:13px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 10px 35px
+        rgba(14,165,233,.2);
+
+    transition:
+        transform .25s ease,
+        box-shadow .3s ease;
+}
+
+.btn:hover{
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 18px 45px
+        rgba(14,165,233,.35);
+}
+
+.btn:active{
+    transform:
+        translateY(-1px)
+        scale(.98);
+}
+
+.btn.g{
+    color:#03150d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6ee7b7,
+            #34d399,
+            #10b981
+        );
+}
+
+.btn.s{
+    color:#e2e8f0;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    box-shadow:none;
+}
+
+.btn.red{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f87171,
+            #ef4444
+        );
+}
+
+.btn.sm{
+    min-height:37px;
+
+    padding:
+        0 13px;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   RIPPLE
+========================================================= */
+
+.ripple{
+    position:absolute;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.4);
+
+    transform:
+        translate(-50%,-50%)
+        scale(0);
+
+    pointer-events:none;
+
+    animation:
+        ripple .7s
+        ease-out;
+}
+
+
+/* =========================================================
+   HERO STATS
+========================================================= */
+
+.hero-stats{
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    width:
+        min(680px,100%);
+
+    gap:12px;
+
+    margin-top:58px;
+}
+
+.stat{
+    padding:19px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    backdrop-filter:
+        blur(15px);
+
+    transition:.35s ease;
+}
+
+.stat:hover{
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(56,189,248,.25);
+
+    background:
+        rgba(56,189,248,.045);
+}
+
+.stat strong{
+    display:block;
+
+    font-family:
+        Orbitron,
+        sans-serif;
+
+    font-size:22px;
+}
+
+.stat span{
+    display:block;
+
+    margin-top:5px;
+
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   SERVER CARD
+========================================================= */
+
+.server-card{
+    position:relative;
+
+    width:
+        min(
+            90%,
+            1000px
+        );
+
+    margin:
+        10px auto
+        65px;
+
+    padding:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(52,211,153,.15);
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10,25,30,.7),
+            rgba(5,15,22,.72)
+        );
+
+    backdrop-filter:
+        blur(22px);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.45);
+}
+
+.server-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    right:-220px;
+    bottom:-280px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(52,211,153,.13),
+            transparent 65%
+        );
+
+    filter:blur(20px);
+
+    animation:
+        orbFloat 8s
+        ease-in-out
+        infinite;
+
+    pointer-events:none;
+}
+
+.server-card h3{
+    font-size:18px;
+}
+
+.server-card p{
+    color:#64748b;
+
+    margin-top:5px;
+
+    font-size:13px;
+}
+
+.server-top{
+    position:relative;
+
+    z-index:1;
+}
+
+.status{
+    position:relative;
+
+    z-index:1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:
+        7px 12px;
+
+    border-radius:999px;
+
+    color:#6ee7b7;
+
+    background:
+        rgba(52,211,153,.07);
+
+    border:
+        1px solid
+        rgba(52,211,153,.15);
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 15px
+        var(--green);
+
+    animation:
+        pulse 1.5s infinite;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.hd{
+    position:relative;
+
+    text-align:center;
+
+    width:
+        min(
+            95%,
+            900px
+        );
+
+    margin-bottom:35px;
+}
+
+.t{
+    font-family:
+        Orbitron,
+        sans-serif;
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            48px
+        );
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            100deg,
+            #fff,
+            #38bdf8,
+            #818cf8
+        );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:
+        gradientMove 6s
+        linear infinite;
+}
+
+.sub{
+    color:#94a3b8;
+
+    margin-top:10px;
+
+    font-size:14px;
+
+    line-height:1.7;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                240px,
+                1fr
+            )
+        );
+
+    gap:18px;
+
+    width:
+        min(
+            95%,
+            1150px
+        );
+
+    margin:
+        0 auto
+        70px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        ),
+        rgba(5,10,22,.68);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.38);
+
+    transition:
+        transform .15s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+    transform-style:
+        preserve-3d;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    inset:-1px;
+
+    border-radius:inherit;
+
+    background:
+        radial-gradient(
+            400px circle at var(--card-x,50%) var(--card-y,50%),
+            rgba(56,189,248,.13),
+            transparent 42%
+        );
+
+    opacity:0;
+
+    transition:.3s;
+
+    pointer-events:none;
+}
+
+.card:hover::before{
+    opacity:1;
+}
+
+.card:hover{
+    border-color:
+        rgba(56,189,248,.22);
+
+    box-shadow:
+        0 35px 90px
+        rgba(0,0,0,.5);
+}
+
+.card h3{
+    font-size:17px;
+
+    margin-bottom:7px;
+}
+
+.card p{
+    color:#64748b;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+.big{
+    font-family:
+        Orbitron,
+        sans-serif;
+
+    font-size:32px;
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--p),
+            var(--p3)
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+.nm{
+    color:var(--p);
+
+    font-size:22px;
+
+    font-weight:900;
+}
+
+.ds{
+    color:#94a3b8;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* =========================================================
+   SUPPORT DISCORD - BÜYÜTÜLDÜ
+========================================================= */
+
+.discord-card{
+    width:
+        min(
+            900px,
+            94%
+        );
+
+    text-align:center;
+
+    border-color:
+        rgba(88,101,242,.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88,101,242,.09),
+            rgba(15,23,42,.72)
+        );
+}
+
+.discord-card h3{
+    font-size:25px;
+}
+
+.discord-card p{
+    color:#aebbd0;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin:
+        15px auto
+        25px;
+
+    max-width:720px;
+}
+
+
+/* =========================================================
+   AUTH / GİRİŞ
+========================================================= */
+
+.auth{
+    width:
+        min(
+            1000px,
+            94%
+        );
+
+    display:grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    padding:0;
+
+    overflow:hidden;
+
+    margin-bottom:40px;
+}
+
+.auth-f{
+    padding:35px;
+}
+
+.auth-s{
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(56,189,248,.10),
+            transparent 65%
+        ),
+        rgba(7,11,20,.75);
+}
+
+.auth-s img{
+    width:130px;
+
+    border-radius:25px;
+
+    filter:
+        drop-shadow(
+            0 0 30px
+            rgba(56,189,248,.4)
+        );
+
+    animation:
+        logoFloat 4s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   AUTH TABS
+========================================================= */
+
+.tabs{
+    display:flex;
+
+    gap:5px;
+
+    margin-bottom:24px;
+
+    padding:5px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    flex-wrap:wrap;
+}
+
+.tab{
+    flex:1;
+
+    min-width:100px;
+
+    padding:
+        11px 10px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:transparent;
+
+    color:#64748b;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    transition:.3s;
+}
+
+.tab:hover{
+    color:#fff;
+}
+
+.tab.on{
+    color:#fff;
+
+    background:
+        rgba(56,189,248,.1);
+
+    box-shadow:
+        inset 0 0 0
+        1px
+        rgba(56,189,248,.1);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.fm{
+    display:none;
+}
+
+.fm.on{
+    display:block;
+
+    animation:
+        formIn .4s
+        ease;
+}
+
+label{
+    display:block;
+
+    margin:
+        14px 0
+        7px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    font-weight:800;
+}
+
+input,
+textarea{
+    width:100%;
+
+    padding:
+        13px 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:13px;
+
+    outline:none;
+
+    color:#fff;
+
+    background:
+        rgba(0,0,0,.25);
+
+    transition:.3s;
+
+    font-size:13px;
+}
+
+input:focus,
+textarea:focus{
+    border-color:
+        rgba(56,189,248,.5);
+
+    background:
+        rgba(56,189,248,.035);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(56,189,248,.05);
+}
+
+input[type=checkbox]{
+    width:auto;
+
+    margin-right:8px;
+}
+
+.err{
+    min-height:18px;
+
+    margin-top:9px;
+
+    color:#f87171;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   APPLICATION ACCORDIONS
+========================================================= */
+
+.wrap{
+    width:
+        min(
+            92%,
+            950px
+        );
+
+    margin:
+        0 auto
+        70px;
+}
+
+.acc{
+    padding:0;
+
+    margin-bottom:13px;
+}
+
+.acc-h{
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:
+        20px 23px;
+
+    border:none;
+
+    color:#fff;
+
+    background:transparent;
+
+    text-align:left;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    transition:.3s;
+}
+
+.acc-h:hover{
+    color:var(--p);
+
+    background:
+        rgba(56,189,248,.035);
+}
+
+.acc-h span:last-child{
+    color:#38bdf8;
+
+    transition:.3s;
+}
+
+.acc-b{
+    display:none;
+
+    padding:
+        0 23px
+        24px;
+}
+
+.acc-b.on{
+    display:block;
+
+    animation:
+        accordionIn .4s
+        ease;
+}
+
+.acc-b h4{
+    margin:
+        24px 0
+        8px;
+
+    color:var(--p);
+
+    font-size:13px;
+}
+
+.acc-b label{
+    color:#cbd5e1;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   APPLICATIONS
+========================================================= */
+
+.app{
+    margin-bottom:14px;
+}
+
+.app-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.app-top b{
+    font-size:14px;
+}
+
+.app-top small{
+    display:block;
+
+    color:#64748b;
+
+    margin-top:4px;
+
+    font-size:10px;
+}
+
+.ans{
+    margin-top:14px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+        rgba(0,0,0,.2);
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+.ans i{
+    display:block;
+
+    margin-top:10px;
+
+    color:var(--p);
+
+    font-style:normal;
+
+    font-weight:800;
+}
+
+.msg{
+    margin-top:9px;
+
+    padding:11px 14px;
+
+    border-radius:12px;
+
+    background:
+        rgba(56,189,248,.07);
+
+    border:
+        1px solid
+        rgba(56,189,248,.08);
+
+    color:#cbd5e1;
+
+    font-size:12px;
+}
+
+.msg small{
+    color:#64748b;
+}
+
+.row{
+    display:flex;
+
+    gap:7px;
+
+    flex-wrap:wrap;
+
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.st{
+    display:inline-flex;
+
+    padding:
+        6px 10px;
+
+    border-radius:9px;
+
+    font-size:9px;
+
+    font-weight:900;
+}
+
+.st.Beklemede{
+    color:#fde68a;
+
+    background:
+        rgba(250,204,21,.1);
+}
+
+.st.Kabul{
+    color:#6ee7b7;
+
+    background:
+        rgba(52,211,153,.1);
+}
+
+.st.Red{
+    color:#fca5a5;
+
+    background:
+        rgba(239,68,68,.1);
+}
+
+
+/* =========================================================
+   STAFF
+========================================================= */
+
+.staff-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
+    gap:18px;
+
+    width:
+        min(
+            95%,
+            1000px
+        );
+}
+
+.staff-card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:27px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:
+        blur(20px);
+
+    transition:.45s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+}
+
+.staff-card:hover{
+    transform:
+        translateY(-10px)
+        scale(1.02);
+
+    border-color:
+        rgba(56,189,248,.25);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.5);
+}
+
+.avatar{
+    width:100px;
+    height:100px;
+
+    object-fit:cover;
+
+    image-rendering:auto;
+
+    border-radius:20px;
+
+    border:
+        2px solid
+        rgba(56,189,248,.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.4);
+
+    transition:.4s;
+}
+
+.staff-card:hover .avatar{
+    transform:
+        translateY(-7px)
+        rotate(-3deg)
+        scale(1.06);
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.5),
+
+        0 0 35px
+        rgba(56,189,248,.16);
+}
+
+.staff-name{
+    margin-top:17px;
+
+    font-size:18px;
+
+    font-weight:900;
+}
+
+.staff-role{
+    margin-top:6px;
+
+    color:var(--p);
+
+    font-size:11px;
+
+    font-weight:900;
+}
+
+.staff-date{
+    margin-top:8px;
+
+    color:#475569;
+
+    font-size:9px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.75);
+
+    backdrop-filter:
+        blur(16px);
+}
+
+.modal.on{
+    display:flex;
+
+    animation:
+        fadeIn .3s ease;
+}
+
+.modal .card{
+    width:
+        min(
+            600px,
+            100%
+        );
+
+    animation:
+        modalIn .4s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+}
+
+.modal .acts{
+    display:flex;
+
+    gap:8px;
+
+    margin-top:20px;
+}
+
+.modal .acts .btn{
+    flex:1;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:9999;
+
+    min-width:270px;
+
+    max-width:400px;
+
+    padding:
+        15px 18px;
+
+    border:
+        1px solid
+        rgba(56,189,248,.25);
+
+    border-radius:16px;
+
+    color:#fff;
+
+    background:
+        rgba(5,10,22,.9);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.5);
+
+    font-size:12px;
+
+    font-weight:800;
+
+    display:none;
+
+    animation:
+        toastIn .4s
+        ease;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back{
+    position:absolute;
+
+    top:25px;
+    right:30px;
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+
+    transform:
+        translateY(30px);
+}
+
+.reveal.visible{
+    opacity:1;
+
+    transform:none;
+
+    transition:
+        opacity .8s ease,
+        transform .8s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:
+        25px 20px
+        45px;
+
+    text-align:center;
+
+    color:#475569;
+
+    font-size:10px;
+}
+
+footer strong{
+    color:#94a3b8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1050px){
+
+    nav a{
+        padding:
+            9px 8px;
+
+        font-size:10px;
+    }
+
+    .up{
+        display:none!important;
+    }
+
+    .auth{
+        grid-template-columns:1fr;
+    }
+
+    .auth-s{
+        display:none;
+    }
+}
+
+@media(max-width:800px){
+
+    header{
+        width:
+            calc(
+                100% - 16px
+            );
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .logo{
+        width:100%;
+
+        justify-content:center;
+    }
+
+    nav{
+        width:100%;
+
+        overflow-x:auto;
+    }
+
+    nav ul{
+        width:100%;
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+    }
+
+    .hr{
+        width:100%;
+
+        justify-content:center;
+    }
+
+    .page{
+        padding-top:160px;
+    }
+
+    .hero{
+        min-height:620px;
+    }
+
+    .hero h1{
+        font-size:
+            clamp(
+                38px,
+                10vw,
+                65px
+            );
+
+        letter-spacing:-2px;
+    }
+
+    .hero-stats{
+        grid-template-columns:1fr;
+        max-width:320px;
+    }
+
+    .discord-card p{
+        font-size:15px;
+    }
+}
+
+@media(max-width:550px){
+
+    header{
+        position:relative;
+
+        top:0;
+
+        left:0;
+
+        transform:none;
+
+        border-radius:0;
+
+        width:100%;
+    }
+
+    .page{
+        padding-top:35px;
+    }
+
+    .hero{
+        min-height:600px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+
+        width:100%;
+
+        max-width:330px;
+    }
+
+    .hero-buttons .btn{
+        width:100%;
+    }
+
+    .server-card{
+        padding:22px;
+    }
+
+    .auth-f{
+        padding:22px;
+    }
+
+    .tabs{
+        flex-direction:column;
+    }
+
+    .tab{
+        flex:none;
+
+        width:100%;
+    }
+
+    .back{
+        position:relative;
+
+        top:auto;
+        right:auto;
+
+        margin-bottom:15px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.001ms!important;
+
+        animation-iteration-count:1!important;
+
+        transition-duration:.001ms!important;
+    }
+
+    #particles,
+    #ambient,
+    #cursorDot,
+    #cursorRing{
+        display:none;
+    }
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes atmosphere{
+    from{
+        transform:
+            translate3d(
+                -3%,
+                -2%,
+                0
+            )
+            scale(1);
+    }
+
+    to{
+        transform:
+            translate3d(
+                4%,
+                3%,
+                0
+            )
+            scale(1.12);
+    }
+}
+
+@keyframes worldSpin{
+    to{
+        transform:
+            rotate(360deg);
+    }
+}
+
+@keyframes heroLight{
+    from{
+        transform:
+            translate(
+                -80px,
+                -20px
+            )
+            scale(.9);
+    }
+
+    to{
+        transform:
+            translate(
+                100px,
+                40px
+            )
+            scale(1.1);
+    }
+}
+
+@keyframes auroraOne{
+    0%{transform:translate3d(-5vw,-2vh,0) scale(.92) rotate(0deg)}
+    50%{transform:translate3d(15vw,13vh,0) scale(1.12) rotate(12deg)}
+    100%{transform:translate3d(28vw,-4vh,0) scale(.98) rotate(-8deg)}
+}
+
+@keyframes auroraTwo{
+    0%{transform:translate3d(4vw,0,0) scale(1) rotate(0deg)}
+    50%{transform:translate3d(-15vw,15vh,0) scale(1.15) rotate(-15deg)}
+    100%{transform:translate3d(-5vw,-12vh,0) scale(.9) rotate(8deg)}
+}
+
+@keyframes auroraThree{
+    0%{transform:translate3d(-10vw,5vh,0) scale(.9)}
+    50%{transform:translate3d(15vw,-15vh,0) scale(1.18)}
+    100%{transform:translate3d(4vw,-2vh,0) scale(1)}
+}
+
+@keyframes auroraFour{
+    0%{transform:translate3d(0,0,0) scale(.9)}
+    50%{transform:translate3d(-18vw,18vh,0) scale(1.2)}
+    100%{transform:translate3d(12vw,8vh,0) scale(1.02)}
+}
+
+@keyframes ambientSpin{
+    to{transform:rotate(360deg) scale(1.05)}
+}
+
+@keyframes gradientMove{
+    0%{
+        background-position:0%;
+    }
+
+    100%{
+        background-position:300%;
+    }
+}
+
+@keyframes spin{
+    to{
+        transform:
+            rotate(360deg);
+    }
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    50%{
+        transform:scale(1.7);
+        opacity:.5;
+    }
+}
+
+@keyframes badgeFloat{
+    0%,100%{
+        transform:
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translateY(-5px);
+    }
+}
+
+@keyframes orbFloat{
+    0%,100%{
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translate3d(
+                0,
+                -30px,
+                0
+            )
+            scale(1.08);
+    }
+}
+
+@keyframes logoFloat{
+    0%,100%{
+        transform:
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translateY(-10px);
+    }
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.99);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+@keyframes formIn{
+    from{
+        opacity:0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+@keyframes accordionIn{
+    from{
+        opacity:0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+
+        transform:
+            translateY(25px)
+            scale(.94);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes toastIn{
+    from{
+        opacity:0;
+
+        transform:
+            translateX(30px)
+            scale(.95);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+@keyframes ripple{
+    to{
+        transform:
+            translate(-50%,-50%)
+            scale(14);
+
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="loader">
+    <div class="loader-logo">
+        SONTLYX
+    </div>
+
+    <div class="loader-ring"></div>
+</div>
+
+<canvas id="particles"></canvas>
+
+<div id="ambient" aria-hidden="true">
+    <div class="aurora a1"></div>
+    <div class="aurora a2"></div>
+    <div class="aurora a3"></div>
+    <div class="aurora a4"></div>
+</div>
+
+<div id="cursorRing"></div>
+<div id="cursorDot"></div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header id="hdr">
+
+    <a
+        href="#"
+        class="logo"
+        onclick="go('home',event)"
+    >
+
+        <img
+            src="logo.png"
+            alt="Sontlyx"
+        >
+
+        <span>
+            SONTLYX
+        </span>
+
+    </a>
+
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a
+                    href="#"
+                    id="n-home"
+                    class="active"
+                    onclick="go('home',event)"
+                >
+                    Anasayfa
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    id="n-store"
+                    onclick="go('store',event)"
+                >
+                    Mağaza
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    id="n-credit"
+                    onclick="go('credit',event)"
+                >
+                    Kredi Al
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    id="n-support"
+                    onclick="go('support',event)"
+                >
+                    Destek
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    id="n-staff"
+                    onclick="go('staff',event)"
+                >
+                    Yetkililer
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    id="n-apply"
+                    onclick="go('apply',event)"
+                >
+                    Yetkili Başvuruları
+                </a>
+            </li>
+
+            <li
+                id="li-req"
+                style="display:none"
+            >
+
+                <a
+                    href="#"
+                    id="n-requests"
+                    onclick="go('requests',event)"
+                >
+                    Başvuru İstekleri
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <div class="hr">
+
+        <div
+            class="up"
+            id="up"
+        >
+
+            <img
+                id="av"
+                src=""
+                alt=""
+            >
+
+            <span id="un"></span>
+
+        </div>
+
+
+        <button
+            class="hb g"
+            id="cb"
+            onclick="credPanel()"
+        >
+            💚
+            <span id="ca">
+                0
+            </span>
+            Kredi
+        </button>
+
+
+        <!-- GİRİŞ YAP GERİ GELDİ -->
+
+        <a
+            href="#"
+            class="hb on"
+            id="lb"
+            onclick="tab('login');go('auth',event)"
+        >
+            → Giriş Yap
+        </a>
+
+
+        <a
+            href="#"
+            class="hb red"
+            id="ob"
+            onclick="logout(event)"
+        >
+            ← Çıkış Yap
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<div
+    id="p-home"
+    class="page active"
+>
+
+    <section class="hero">
+
+        <div class="hero-light"></div>
+
+        <div
+            class="hero-light two"
+        ></div>
+
+
+        <div class="badge reveal">
+
+            <span>
+                SONTLYX NETWORK
+            </span>
+
+            <span>
+                • ONLINE
+            </span>
+
+        </div>
+
+
+        <h1 class="reveal">
+
+            Yeni nesil
+
+            <span>
+                Minecraft
+            </span>
+
+            deneyimi.
+
+        </h1>
+
+
+        <p class="reveal">
+
+            Sontlyx Network'e katıl,
+            arkadaşlarınla birlikte geliş,
+            savaş, ekonomi ve eğlencenin
+            sınırlarını zorla.
+
+        </p>
+
+
+        <div class="hero-buttons reveal">
+
+            <button
+                class="btn ripple-btn"
+                onclick="copyIP()"
+            >
+                ⚡ Sunucuya Katıl
+            </button>
+
+
+            <button
+                class="btn s ripple-btn"
+                onclick="go('apply')"
+            >
+                ✦ Yetkili Başvurusu
+            </button>
+
+        </div>
+
+
+        <div class="hero-stats reveal">
+
+            <div class="stat">
+
+                <strong id="onlineCount">
+                    0
+                </strong>
+
+                <span>
+                    ONLINE OYUNCU
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    1.21+
+                </strong>
+
+                <span>
+                    MINECRAFT SÜRÜMÜ
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    24/7
+                </strong>
+
+                <span>
+                    AKTİF NETWORK
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="card server-card reveal">
+
+        <div class="server-top">
+
+            <div>
+
+                <div class="status">
+
+                    <span class="dot"></span>
+
+                    SUNUCU AKTİF
+
+                </div>
+
+                <h3
+                    style="margin-top:12px"
+                >
+                    Sontlyx Network
+                </h3>
+
+                <p>
+                    Survival • Savaş • Ekonomi
+                </p>
+
+            </div>
+
+
+            <button
+                class="btn sm"
+                onclick="copyIP()"
+            >
+                IP Kopyala
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STORE
+===================================================== -->
+
+<div
+    id="p-store"
+    class="page"
+>
+
+    <div class="hd">
+
+        <h1 class="t">
+            🛍️ Mağaza
+        </h1>
+
+        <p class="sub">
+            Sunucumuzu destekle ve özel avantajlar kazan!
+        </p>
+
+    </div>
+
+
+    <div
+        class="grid"
+        id="vip-grid"
+    ></div>
+
+</div>
+
+
+<!-- =====================================================
+     CREDIT
+===================================================== -->
+
+<div
+    id="p-credit"
+    class="page"
+>
+
+    <div class="hd">
+
+        <h1 class="t">
+            💚 Kredi Al
+        </h1>
+
+        <p class="sub">
+            Sunucumuzu destekle ve kredi satın al!
+        </p>
+
+    </div>
+
+
+    <div
+        class="grid"
+        id="cr-grid"
+    ></div>
+
+</div>
+
+
+<!-- =====================================================
+     SUPPORT
+===================================================== -->
+
+<div
+    id="p-support"
+    class="page"
+>
+
+    <div class="hd">
+
+        <h1 class="t">
+            💬 Destek Merkezi
+        </h1>
+
+        <p class="sub">
+            Sorunların için buradayız.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div
+                style="font-size:3rem"
+            >
+                🎮
+            </div>
+
+            <h3>
+                Oyun Sorunları
+            </h3>
+
+            <p>
+                Sunucuya bağlanma,
+                lag ve teknik sorunlar
+                için destek al.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div
+                style="font-size:3rem"
+            >
+                💳
+            </div>
+
+            <h3>
+                Ödeme & Hesap
+            </h3>
+
+            <p>
+                VIP satın alma,
+                hesap yönetimi ve
+                ödeme sorunları.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div
+                style="font-size:3rem"
+            >
+                ⚙️
+            </div>
+
+            <h3>
+                Genel Sorular
+            </h3>
+
+            <p>
+                Sunucu kuralları,
+                sistemler ve diğer
+                sorular.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- YAZI BÜYÜTÜLDÜ -->
+
+    <div
+        class="card discord-card"
+    >
+
+        <h3>
+            🌟 Discord Üzerinden Destek
+        </h3>
+
+        <p>
+            Discord üzerinden ticket açabilirsiniz.
+            Destek ekibimiz sorunlarınızla ilgilenir
+            ve size mümkün olan en kısa sürede yardımcı olur.
+        </p>
+
+
+        <a
+            href="https://discord.gg/3WKDEJ2d4a"
+            target="_blank"
+            class="btn"
+            style="
+                background:#5865f2;
+                color:#fff;
+                text-decoration:none;
+            "
+        >
+            🔗 Discord'a Git
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STAFF
+===================================================== -->
+
+<div
+    id="p-staff"
+    class="page"
+>
+
+    <div class="hd">
+
+        <h1 class="t">
+            Yetkililer
+        </h1>
+
+        <p class="sub">
+            Sontlyx Network ekibi.
+        </p>
+
+    </div>
+
+
+    <div
+        id="staff-grid"
+        class="staff-grid"
+    ></div>
+
+</div>
+
+
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
+<div
+    id="p-apply"
+    class="page"
+>
+
+    <div
+        class="wrap"
+        id="apply-box"
+    ></div>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN REQUESTS
+===================================================== -->
+
+<div
+    id="p-requests"
+    class="page"
+>
+
+    <div
+        class="wrap"
+        id="req-box"
+    ></div>
+
+</div>
+
+
+<!-- =====================================================
+     AUTH
+===================================================== -->
+
+<div
+    id="p-auth"
+    class="page"
+>
+
+    <a
+        href="#"
+        class="hb on back"
+        onclick="go('home',event)"
+    >
+        ← Geri Dön
+    </a>
+
+
+    <div class="card auth">
+
+        <div class="auth-f">
+
+
+            <!-- GİRİŞ / KAYIT / YÖNETİCİ -->
+
+            <div class="tabs">
+
+                <button
+                    class="tab on"
+                    id="t-login"
+                    onclick="tab('login')"
+                >
+                    GİRİŞ YAP
+                </button>
+
+
+                <button
+                    class="tab"
+                    id="t-register"
+                    onclick="tab('register')"
+                >
+                    KAYIT OL
+                </button>
+
+
+                <button
+                    class="tab"
+                    id="t-admin"
+                    onclick="tab('admin')"
+                >
+                    YÖNETİCİ OLARAK GİRİŞ
+                </button>
+
+            </div>
+
+
+            <!-- NORMAL LOGIN -->
+
+            <div
+                class="fm on"
+                id="f-login"
+            >
+
+                <label>
+                    Kullanıcı Adı
+                </label>
+
+                <input
+                    id="l-u"
+                    placeholder="Kullanıcı Adı"
+                >
+
+
+                <label>
+                    Şifre
+                </label>
+
+                <input
+                    id="l-p"
+                    type="password"
+                    placeholder="••••••••"
+                >
+
+
+                <button
+                    class="btn"
+                    onclick="login()"
+                    style="width:100%;margin-top:20px"
+                >
+                    Giriş Yap
+                </button>
+
+
+                <div
+                    class="err"
+                    id="e-login"
+                ></div>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <div
+                class="fm"
+                id="f-register"
+            >
+
+                <label>
+                    Kullanıcı Adı
+                </label>
+
+                <input
+                    id="r-u"
+                    placeholder="Minecraft Nick"
+                >
+
+
+                <label>
+                    E-Posta
+                </label>
+
+                <input
+                    id="r-e"
+                    type="email"
+                    placeholder="E-posta"
+                >
+
+
+                <label>
+                    Şifre
+                </label>
+
+                <input
+                    id="r-p"
+                    type="password"
+                    placeholder="••••••••"
+                >
+
+
+                <button
+                    class="btn"
+                    onclick="register()"
+                    style="width:100%;margin-top:20px"
+                >
+                    Kayıt Ol
+                </button>
+
+
+                <div
+                    class="err"
+                    id="e-register"
+                ></div>
+
+            </div>
+
+
+            <!-- ADMIN LOGIN -->
+
+            <div
+                class="fm"
+                id="f-admin"
+            >
+
+                <label>
+                    Yönetici Kullanıcı Adı
+                </label>
+
+                <input
+                    id="a-u"
+                    placeholder="Kullanıcı Adı"
+                >
+
+
+                <label>
+                    Yönetici Şifresi
+                </label>
+
+                <input
+                    id="a-p"
+                    type="password"
+                    placeholder="••••••••"
+                >
+
+
+                <button
+                    class="btn"
+                    onclick="adminLogin()"
+                    style="width:100%;margin-top:20px"
+                >
+                    Yönetici Girişi
+                </button>
+
+
+                <div
+                    class="err"
+                    id="e-admin"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-s">
+
+            <img
+                src="logo.png"
+                alt="Sontlyx"
+            >
+
+            <h2
+                style="margin-top:20px"
+            >
+                Sontlyx Network
+            </h2>
+
+            <p class="ds">
+                MINECRAFT SUNUCUSU
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    id="modal"
+    class="modal"
+>
+
+    <div class="card">
+
+        <h2
+            id="m-t"
+            style="color:var(--p)"
+        ></h2>
+
+        <div
+            class="big"
+            id="m-b"
+            style="margin:12px 0"
+        ></div>
+
+        <p
+            class="ds"
+            id="m-s"
+        ></p>
+
+
+        <div class="acts">
+
+            <button
+                class="btn"
+                id="m-ok"
+            >
+                Tamam
+            </button>
+
+            <button
+                class="btn s"
+                onclick="closeM()"
+            >
+                Kapat
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<footer>
+
+    <strong>
+        Sontlyx Network
+    </strong>
+
+    © <span id="yearNow">2026</span> • Tüm hakları saklıdır.
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+const L = key => {
+
+    try{
+        return JSON.parse(
+            localStorage.getItem(key)
+        );
+    }
+
+    catch(e){
+        return null;
+    }
+
+};
+
+const S = (key,value) => {
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+
+};
+
+const $ = id =>
+    document.getElementById(id);
+
+const esc = value =>
+    String(value ?? "")
+    .replace(
+        /[&<>"']/g,
+        char => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#39;"
+        }[char])
+    );
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+const DB =
+    "https://sontylxsite-default-rtdb.europe-west1.firebasedatabase.app";
+
+const DBU =
+    DB.replace(/\/+$/,"");
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+let me =
+    L("session");
+
+let openApps = {};
+
+
+/* =========================================================
+   FIREBASE APPLICATIONS
+========================================================= */
+
+async function getApps(){
+
+    try{
+
+        const response =
+            await fetch(
+                DBU +
+                "/apps.json"
+            );
+
+        const data =
+            await response.json();
+
+        if(!data)
+            return [];
+
+        return Object.values(data)
+            .map(app => ({
+                ...app,
+                answers:
+                    app.answers || [],
+                msgs:
+                    app.msgs || []
+            }));
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        return L("apps") || [];
+    }
+
+}
+
+
+async function putApp(app){
+
+    try{
+
+        const response =
+            await fetch(
+                DBU +
+                "/apps/" +
+                app.id +
+                ".json",
+                {
+                    method:"PUT",
+                    body:JSON.stringify(app)
+                }
+            );
+
+        return response.ok;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        return false;
+    }
+
+}
+
+
+async function rmApp(id){
+
+    try{
+
+        await fetch(
+            DBU +
+            "/apps/" +
+            id +
+            ".json",
+            {
+                method:"DELETE"
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+    }
+
+}
+
+
+/* =========================================================
+   FIREBASE STAFF
+========================================================= */
+
+async function getStaff(){
+
+    try{
+
+        const response =
+            await fetch(
+                DBU +
+                "/staff.json"
+            );
+
+        const data =
+            await response.json();
+
+        if(!data)
+            return [];
+
+        return Object.values(data);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        return [];
+    }
+
+}
+
+
+async function putStaff(member){
+
+    try{
+
+        await fetch(
+            DBU +
+            "/staff/" +
+            encodeURIComponent(
+                member.username
+            ) +
+            ".json",
+            {
+                method:"PUT",
+                body:JSON.stringify(member)
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+    }
+
+}
+
+
+async function removeStaff(username){
+
+    try{
+
+        await fetch(
+            DBU +
+            "/staff/" +
+            encodeURIComponent(
+                username
+            ) +
+            ".json",
+            {
+                method:"DELETE"
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message){
+
+    const box =
+        $("toast");
+
+    box.textContent =
+        message;
+
+    box.style.display =
+        "block";
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                box.style.display =
+                    "none";
+
+            },
+            3000
+        );
+}
+
+
+/* =========================================================
+   COPY IP
+========================================================= */
+
+function copyIP(){
+
+    const ip =
+        "sontlyxnw.com";
+
+    navigator.clipboard
+        ?.writeText(ip)
+        .then(
+            () =>
+                toast(
+                    "✨ Sunucu adresi kopyalandı!"
+                )
+        )
+        .catch(
+            () =>
+                toast(
+                    "Sunucu IP: " + ip
+                )
+        );
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function go(page,event){
+
+    if(event)
+        event.preventDefault();
+
+    if(
+        page === "requests" &&
+        (!me || me.role !== "admin")
+    ){
+
+        page = "home";
+    }
+
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            element =>
+                element.classList.remove(
+                    "active"
+                )
+        );
+
+
+    const target =
+        $("p-" + page);
+
+    if(!target)
+        return;
+
+
+    target.classList.add(
+        "active"
+    );
+
+
+    document
+        .querySelectorAll("nav a")
+        .forEach(
+            a =>
+                a.classList.remove(
+                    "active"
+                )
+        );
+
+
+    const nav =
+        $("n-" + page);
+
+    if(nav)
+        nav.classList.add(
+            "active"
+        );
+
+
+    if(page === "apply")
+        renderApply();
+
+
+    if(page === "requests")
+        renderReq();
+
+
+    if(page === "staff")
+        renderStaff();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    setTimeout(
+        revealElements,
+        80
+    );
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openM(
+    title,
+    big,
+    small,
+    callback
+){
+
+    $("m-t").textContent =
+        title;
+
+    $("m-b").textContent =
+        big;
+
+    $("m-s").textContent =
+        small;
+
+
+    $("m-ok").onclick =
+        () => {
+
+            closeM();
+
+            if(callback)
+                callback();
+
+        };
+
+
+    $("modal")
+        .classList
+        .add("on");
+}
+
+
+function closeM(){
+
+    $("modal")
+        .classList
+        .remove("on");
+}
+
+
+$("modal").addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target.id ===
+            "modal"
+        )
+            closeM();
+
+    }
+);
+
+
+/* =========================================================
+   CREDIT
+========================================================= */
+
+function credPanel(){
+
+    openM(
+        "💚 Kredi Paneli",
+        me?.credits || 0,
+        "Toplam Kredi",
+        () => go("credit")
+    );
+
+}
+
+
+/* =========================================================
+   STORE
+========================================================= */
+
+$("vip-grid").innerHTML = [
+
+    [
+        "VIP",
+        "Temel avantajlar ve özel cihazlar",
+        10
+    ],
+
+    [
+        "VIP+",
+        "Gelişmiş özellikler ve komutlar",
+        20
+    ],
+
+    [
+        "VIP++",
+        "Premium üyelik",
+        30
+    ],
+
+    [
+        "VIP+++",
+        "Ultra premium paket",
+        45
+    ],
+
+    [
+        "SontlyxVIP",
+        "Son seviye özel üyelik",
+        60
+    ]
+
+]
+.map(
+    item => `
+
+        <div class="card">
+
+            <div class="nm">
+                ${item[0]}
+            </div>
+
+            <div class="ds">
+                ${item[1]}
+            </div>
+
+            <div class="big">
+                ${item[2]}
+            </div>
+
+            <div class="ds">
+                Kredi
+            </div>
+
+            <button
+                class="btn"
+                onclick="
+                    openM(
+                        '${item[0]}',
+                        '${item[2]} Kredi',
+                        'Mağaza sistemi'
+                    )
+                "
+            >
+                Satın Al
+            </button>
+
+        </div>
+
+    `
+)
+.join("");
+
+
+/* =========================================================
+   CREDIT PACKAGES
+========================================================= */
+
+$("cr-grid").innerHTML =
+    [10,40,60,100]
+    .map(
+        credits => `
+
+            <div
+                class="card"
+                style="
+                    border-color:
+                    rgba(52,211,153,.25)
+                "
+            >
+
+                <div class="big">
+                    ${credits}
+                </div>
+
+                <div class="ds">
+                    Kredi
+                </div>
+
+                <div
+                    class="nm"
+                    style="
+                        color:var(--green)
+                    "
+                >
+                    ₺${credits}
+                </div>
+
+                <button
+                    class="btn g"
+                    onclick="
+                        openM(
+                            'Kredi Satın Al',
+                            '${credits} Kredi',
+                            '₺${credits}'
+                        )
+                    "
+                >
+                    Satın Al
+                </button>
+
+            </div>
+
+        `
+    )
+    .join("");
+
+
+/* =========================================================
+   SESSION REFRESH
+========================================================= */
+
+function refresh(){
+
+    const logged =
+        !!me;
+
+
+    $("up")
+        .classList
+        .toggle(
+            "on",
+            logged
+        );
+
+
+    $("cb")
+        .classList
+        .toggle(
+            "on",
+            logged &&
+            me.role !== "admin"
+        );
+
+
+    $("ob")
+        .classList
+        .toggle(
+            "on",
+            logged
+        );
+
+
+    $("lb")
+        .classList
+        .toggle(
+            "on",
+            !logged
+        );
+
+
+    $("li-req")
+        .style.display =
+            logged &&
+            me.role === "admin"
+            ? ""
+            : "none";
+
+
+    if(logged){
+
+        $("un").textContent =
+            me.username +
+            (
+                me.role === "admin"
+                    ? " • Yönetici"
+                    : ""
+            );
+
+
+        $("av").src =
+            "https://mc-heads.net/avatar/" +
+            encodeURIComponent(
+                me.username
+            ) +
+            "/45";
+
+
+        $("ca").textContent =
+            me.credits || 0;
+    }
+
+}
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+function setSession(session){
+
+    me =
+        session;
+
+    S(
+        "session",
+        session
+    );
+
+    refresh();
+}
+
+
+/* =========================================================
+   AUTH TABS
+========================================================= */
+
+function tab(name){
+
+    [
+        "login",
+        "register",
+        "admin"
+    ]
+    .forEach(
+        item => {
+
+            $("t-" + item)
+                .classList
+                .toggle(
+                    "on",
+                    item === name
+                );
+
+            $("f-" + item)
+                .classList
+                .toggle(
+                    "on",
+                    item === name
+                );
+
+            $("e-" + item)
+                .textContent = "";
+
+        }
+    );
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+function register(){
+
+    const username =
+        $("r-u")
+            .value
+            .trim();
+
+    const email =
+        $("r-e")
+            .value
+            .trim();
+
+    const password =
+        $("r-p")
+            .value;
+
+
+    const error =
+        $("e-register");
+
+
+    if(
+        !username ||
+        !email ||
+        !password
+    ){
+
+        error.textContent =
+            "Tüm alanları doldurun.";
+
+        return;
+    }
+
+
+    if(
+        !/^\w{3,16}$/
+            .test(username)
+    ){
+
+        error.textContent =
+            "Kullanıcı adı 3-16 karakter olmalı.";
+
+        return;
+    }
+
+
+    if(password.length < 4){
+
+        error.textContent =
+            "Şifre en az 4 karakter olmalı.";
+
+        return;
+    }
+
+
+    const users =
+        L("users") || [];
+
+
+    if(
+        username
+            .toLowerCase()
+        ===
+        "sontlyx"
+    ){
+
+        error.textContent =
+            "Bu kullanıcı adı kullanılamaz.";
+
+        return;
+    }
+
+
+    if(
+        users.some(
+            user =>
+                user.u
+                    .toLowerCase()
+                ===
+                username
+                    .toLowerCase()
+        )
+    ){
+
+        error.textContent =
+            "Bu kullanıcı adı zaten alınmış.";
+
+        return;
+    }
+
+
+    users.push({
+        u:username,
+        e:email,
+        p:password,
+        credits:0
+    });
+
+
+    S(
+        "users",
+        users
+    );
+
+
+    setSession({
+        username,
+        role:"user",
+        credits:0
+    });
+
+
+    toast(
+        "✨ Kayıt başarılı!"
+    );
+
+
+    go("home");
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function login(){
+
+    const username =
+        $("l-u")
+            .value
+            .trim();
+
+    const password =
+        $("l-p")
+            .value;
+
+
+    const user =
+        (L("users") || [])
+        .find(
+            item =>
+                item.u
+                    .toLowerCase()
+                ===
+                username
+                    .toLowerCase()
+                &&
+                item.p === password
+        );
+
+
+    if(!user){
+
+        $("e-login")
+            .textContent =
+            "Kullanıcı adı veya şifre hatalı.";
+
+        return;
+    }
+
+
+    setSession({
+
+        username:user.u,
+
+        role:"user",
+
+        credits:
+            user.credits || 0
+
+    });
+
+
+    toast(
+        "Hoş geldin, " +
+        user.u +
+        "!"
+    );
+
+
+    go("home");
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+function adminLogin(){
+
+    const username =
+        $("a-u")
+            .value
+            .trim();
+
+    const password =
+        $("a-p")
+            .value;
+
+
+    /*
+        YÖNETİCİ BİLGİLERİ
+
+        Kullanıcı:
+        Sontlyx
+
+        Şifre:
+        ahmet@123
+    */
+
+    if(
+        username === "Sontlyx" &&
+        password === "ahmet@123"
+    ){
+
+        setSession({
+
+            username:"Sontlyx",
+
+            role:"admin",
+
+            credits:0
+
+        });
+
+
+        toast(
+            "👑 Yönetici olarak giriş yapıldı!"
+        );
+
+
+        go("home");
+
+        return;
+    }
+
+
+    $("e-admin")
+        .textContent =
+        "Yönetici bilgileri hatalı.";
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(event){
+
+    if(event)
+        event.preventDefault();
+
+
+    localStorage.removeItem(
+        "session"
+    );
+
+
+    me = null;
+
+    refresh();
+
+    go("home");
+
+    toast(
+        "Çıkış yapıldı."
+    );
+}
+
+
+/* =========================================================
+   APPLICATION QUESTIONS
+   ESKİ SİSTEM
+   DROPDOWN YOK
+========================================================= */
+
+const P = [
+
+    "i:Adınız ve Soyadınız (İsteğe bağlı):",
+
+    "i:Oyuncu Adınız (Minecraft Nick):",
+
+    "i:Yaşınız:",
+
+    "i:Günlük Aktiflik Süreniz (Hafta içi / Hafta sonu):",
+
+    "i:Discord Kullanıcı Adınız:"
+
+];
+
+
+const P2 = [
+
+    P[0],
+
+    P[1],
+
+    P[2],
+
+    "i:Discord Kullanıcı Adınız:"
+
+];
+
+
+const FORMS = [
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+{
+
+    t:
+        "Minecraft Sunucusu Admin Başvuru Formu",
+
+    n:
+        "Admin",
+
+    s:[
+
+        [
+            "1. Kişisel ve İletişim Bilgileri",
+
+            P
+        ],
+
+        [
+
+            "2. Deneyim ve Yetkinlikler",
+
+            [
+
+                "Daha önce başka bir sunucuda yetkili oldunuz mu? Olduysanız hangi görevlerde bulundunuz ve ayrılma sebebiniz nedir?",
+
+                "i:Minecraft komut bilginizi 1 ile 10 arasında puanlayınız:",
+
+                "i:Yetkili olduğunuz süre boyunca haftalık ortalama kaç saat katkı sağlayabilirsiniz?"
+
+            ]
+
+        ],
+
+        [
+
+            "3. Senaryo ve Durum Soruları",
+
+            [
+
+                "Senaryo 1: Bir oyuncunun hile kullandığından şüpheleniyorsunuz ancak kesin kanıtınız yok. Ne yaparsınız?",
+
+                "Senaryo 2: Bir oyuncu size hakaret ediyor. Nasıl davranırsınız?",
+
+                "Senaryo 3: Arkadaşınız olan bir oyuncunun kural çiğnediğini gördünüz. Ne yaparsınız?"
+
+            ]
+
+        ],
+
+        [
+
+            "4. Son Değerlendirme",
+
+            [
+
+                "Neden sizi ekibe dahil etmeliyiz?",
+
+                "Ekip içerisindeki anlaşmazlıkları nasıl çözersiniz?",
+
+                "c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve kurallara uyacağınızı kabul ediyor musunuz?"
+
+            ]
+
+        ]
+
+    ]
+
+},
+
+
+/* =====================================================
+   REHBER
+===================================================== */
+
+{
+
+    t:
+        "Minecraft Sunucusu Rehber Başvuru Formu",
+
+    n:
+        "Rehber",
+
+    s:[
+
+        [
+
+            "1. Kişisel ve İletişim Bilgileri",
+
+            P
+
+        ],
+
+        [
+
+            "2. Deneyim ve İletişim",
+
+            [
+
+                "Daha önce başka bir sunucuda rehberlik veya benzeri bir görev yaptınız mı?",
+
+                "Oyuncularla iletişim kurarken kendinize 10 üzerinden kaç puan verirsiniz? Neden?",
+
+                "i:Mikrofonunuz var mı ve sesli iletişim kurabiliyor musunuz?"
+
+            ]
+
+        ],
+
+        [
+
+            "3. Senaryo ve Durum Soruları",
+
+            [
+
+                "Senaryo 1: Yeni başlayan oyuncu sürekli komutları soruyor. Nasıl yardımcı olursunuz?",
+
+                "Senaryo 2: Bir oyuncu hakaret ediyor. Nasıl davranırsınız?",
+
+                "Senaryo 3: Bir oyuncu hile kullandığını söylüyor. Rehber olarak ne yaparsınız?"
+
+            ]
+
+        ],
+
+        [
+
+            "4. Son Değerlendirme",
+
+            [
+
+                "Oyunculara neden sabırlı ve adil yaklaşabileceğinizi düşünüyorsunuz?",
+
+                "Sizi neden rehber olarak seçmeliyiz?",
+
+                "c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve sunucu kurallarına uyacağınızı kabul ediyor musunuz?"
+
+            ]
+
+        ]
+
+    ]
+
+},
+
+
+/* =====================================================
+   ANTICHEAT
+===================================================== */
+
+{
+
+    t:
+        "Minecraft Sunucusu AntiCheat Yetkilisi Başvuru Formu",
+
+    n:
+        "AntiCheat",
+
+    s:[
+
+        [
+
+            "1. Kişisel ve İletişim Bilgileri",
+
+            P
+
+        ],
+
+        [
+
+            "2. Teknik Bilgi ve Deneyim",
+
+            [
+
+                "Daha önce hangi sunucularda AntiCheat veya SS yetkilisi oldunuz?",
+
+                "Hangi AntiCheat sistemlerini incelediniz?",
+
+                "i:Modifiye edilmiş Minecraft istemcilerini ve hile izlerini ayırt etme bilginizi 1-10 arasında puanlayınız."
+
+            ]
+
+        ],
+
+        [
+
+            "3. Senaryo ve Teknik Durum Soruları",
+
+            [
+
+                "Reach veya Velocity hilesinden şüphelendiğiniz oyuncuyu incelerken nelere dikkat edersiniz?",
+
+                "Screen Share sırasında ilk kontrol edeceğiniz şeyler nelerdir?",
+
+                "Oyuncu inceleme sırasında oyunu kapatırsa ne yaparsınız?"
+
+            ]
+
+        ],
+
+        [
+
+            "4. Son Değerlendirme",
+
+            [
+
+                "AntiCheat loglarını okuma konusunda ne kadar tecrübelisiniz?",
+
+                "Sizi diğer adaylardan ayıran teknik yetkinlikleriniz nelerdir?",
+
+                "c:Yukarıdaki bilgilerin tamamen doğru olduğunu kabul ediyor musunuz?"
+
+            ]
+
+        ]
+
+    ]
+
+},
+
+
+/* =====================================================
+   MEDIA
+===================================================== */
+
+{
+
+    t:
+        "Minecraft Sunucusu Media Başvuru Formu",
+
+    n:
+        "Media",
+
+    s:[
+
+        [
+
+            "Kişisel ve İletişim Bilgileri",
+
+            P2
+
+        ],
+
+        [
+
+            "Sosyal Medya ve Kanal Bilgileri",
+
+            [
+
+                "i:İçerik ürettiğiniz platformlar hangileridir?",
+
+                "i:Kanalınızın bağlantısı:",
+
+                "i:Abone veya takipçi sayınız:",
+
+                "i:Ortalama izlenme veya etkileşim oranınız:"
+
+            ]
+
+        ],
+
+        [
+
+            "Deneyim ve İçerik Planı",
+
+            [
+
+                "Daha önce başka sunucular için tanıtım videosu yaptınız mı?",
+
+                "Sunucumuz için ne tür içerikler üretebilirsiniz?",
+
+                "i:Haftalık ayırabileceğiniz süre:"
+
+            ]
+
+        ],
+
+        [
+
+            "Son Değerlendirme",
+
+            [
+
+                "Sunucumuza oyuncu çekmek için stratejiniz nedir?",
+
+                "c:Yukarıdaki bilgilerin tamamen doğru olduğunu kabul ediyor musunuz?"
+
+            ]
+
+        ]
+
+    ]
+
+},
+
+
+/* =====================================================
+   BUILDER
+===================================================== */
+
+{
+
+    t:
+        "Minecraft Sunucusu Builder Başvuru Formu",
+
+    n:
+        "Builder",
+
+    s:[
+
+        [
+
+            "Kişisel ve İletişim Bilgileri",
+
+            P2
+
+        ],
+
+        [
+
+            "Deneyim ve Yetkinlikler",
+
+            [
+
+                "Daha önce hangi sunucularda Builder olarak görev yaptınız?",
+
+                "Hangi yapı tarzlarında iyisiniz?",
+
+                "i:WorldEdit / VoxelSniper bilginizi 1-10 arasında puanlayınız."
+
+            ]
+
+        ],
+
+        [
+
+            "Portfolyo",
+
+            [
+
+                "Daha önce yaptığınız yapıların fotoğraf veya portfolyo bağlantısı var mı?",
+
+                "Sıfırdan Spawn tasarlamanız gerekirse nereden başlarsınız?"
+
+            ]
+
+        ],
+
+        [
+
+            "Çalışma Düzeni",
+
+            [
+
+                "i:Sunucu için haftalık kaç saat aktif olabilirsiniz?",
+
+                "Verilen projeleri zamanında tamamlayabilir misiniz?",
+
+                "c:Yukarıdaki bilgilerin tamamen doğru olduğunu kabul ediyor musunuz?"
+
+            ]
+
+        ]
+
+    ]
+
+}
+
+];
+
+
+/* =========================================================
+   RENDER APPLICATION
+========================================================= */
+
+async function renderApply(){
+
+    const box =
+        $("apply-box");
+
+
+    let html = `
+
+        <div class="hd">
+
+            <h1 class="t">
+                📝 Yetkili Başvuruları
+            </h1>
+
+            <p class="sub">
+                Kendine uygun başvuru türünü aç
+                ve formu doldur.
+            </p>
+
+        </div>
+
+    `;
+
+
+    if(!me){
+
+        box.innerHTML =
+            html +
+
+            `
+
+            <div
+                class="card"
+                style="text-align:center"
+            >
+
+                <h3>
+                    🔒 Giriş Gerekli
+                </h3>
+
+                <p
+                    class="ds"
+                    style="margin:12px 0 20px"
+                >
+                    Başvuru yapmak için
+                    önce giriş yapmalısın.
+                </p>
+
+                <button
+                    class="btn"
+                    onclick="
+                        tab('login');
+                        go('auth')
+                    "
+                >
+                    Giriş Yap
+                </button>
+
+            </div>
+
+            `;
+
+        return;
+    }
+
+
+    /*
+        ARTIK DROPDOWN YOK.
+
+        Her başvuru ayrı accordion.
+    */
+
+    FORMS.forEach(
+        (form,index) => {
+
+            let questionIndex = 0;
+
+
+            html += `
+
+                <div class="card acc">
+
+                    <button
+                        class="acc-h"
+                        onclick="
+                            toggleAccordion(${index})
+                        "
+                    >
+
+                        <span>
+                            📋
+                            ${esc(form.t)}
+                        </span>
+
+                        <span>
+                            ▾
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        class="acc-b"
+                        id="fb${index}"
+                    >
+            `;
+
+
+            form.s.forEach(
+                section => {
+
+                    html += `
+
+                        <h4>
+                            ${esc(section[0])}
+                        </h4>
+
+                    `;
+
+
+                    section[1].forEach(
+                        question => {
+
+                            const checkbox =
+                                question
+                                    .startsWith(
+                                        "c:"
+                                    );
+
+                            const optional =
+                                question
+                                    .startsWith(
+                                        "i:"
+                                    );
+
+                            const label =
+                                (
+                                    checkbox ||
+                                    optional
+                                )
+                                ? question.slice(2)
+                                : question;
+
+
+                            const id =
+                                "q" +
+                                index +
+                                "_" +
+                                questionIndex;
+
+
+                            questionIndex++;
+
+
+                            if(checkbox){
+
+                                html += `
+
+                                    <label>
+
+                                        <input
+                                            type="checkbox"
+                                            id="${id}"
+                                            data-form="${index}"
+                                            data-label="${esc(label)}"
+                                        >
+
+                                        ${esc(label)}
+
+                                    </label>
+
+                                `;
+
+                            }
+
+                            else{
+
+                                html += `
+
+                                    <label>
+                                        ${esc(label)}
+                                    </label>
+
+                                    ${
+                                        optional
+                                        ?
+
+                                        `<input
+                                            id="${id}"
+                                            data-form="${index}"
+                                            data-label="${esc(label)}"
+                                        >`
+
+                                        :
+
+                                        `<textarea
+                                            rows="3"
+                                            id="${id}"
+                                            data-form="${index}"
+                                            data-label="${esc(label)}"
+                                        ></textarea>`
+                                    }
+
+                                `;
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+            html += `
+
+                    <button
+                        class="btn"
+                        style="margin-top:20px"
+                        onclick="
+                            submitApp(${index})
+                        "
+                    >
+                        Başvuruyu Gönder
+                    </button>
+
+                    <div
+                        class="err"
+                        id="ee${index}"
+                    ></div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    const apps =
+        await getApps();
+
+
+    const mine =
+        apps
+            .filter(
+                app =>
+                    app.user ===
+                    me.username
+            )
+            .sort(
+                (a,b) =>
+                    Number(b.id) -
+                    Number(a.id)
+            );
+
+
+    html += `
+
+        <h2
+            style="
+                margin:
+                35px 0 15px
+            "
+        >
+            📨 Başvurularım
+        </h2>
+
+    `;
+
+
+    if(mine.length){
+
+        html +=
+            mine
+            .map(
+                app => `
+
+                    <div class="card app">
+
+                        <div class="app-top">
+
+                            <div>
+
+                                <b>
+                                    ${esc(
+                                        app.type
+                                    )}
+                                    Başvurusu
+                                </b>
+
+                                <small>
+                                    ${esc(
+                                        app.date
+                                    )}
+                                </small>
+
+                            </div>
+
+
+                            <span
+                                class="
+                                    st
+                                    ${
+                                        statusClass(
+                                            app.status
+                                        )
+                                    }
+                                "
+                            >
+                                ${esc(
+                                    app.status
+                                )}
+                            </span>
+
+                        </div>
+
+
+                        ${messagesHTML(app)}
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+    }
+
+    else{
+
+        html += `
+
+            <p class="ds">
+                Henüz başvurun yok.
+            </p>
+
+        `;
+
+    }
+
+
+    box.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   ACCORDION
+========================================================= */
+
+function toggleAccordion(index){
+
+    const box =
+        $("fb" + index);
+
+    box.classList.toggle(
+        "on"
+    );
+
+}
+
+
+/* =========================================================
+   SUBMIT APPLICATION
+========================================================= */
+
+async function submitApp(formIndex){
+
+    const elements =
+        [
+            ...document
+            .querySelectorAll(
+                `[data-form="${formIndex}"]`
+            )
+        ];
+
+
+    const error =
+        $("ee" + formIndex);
+
+
+    const answers = [];
+
+
+    for(
+        const element
+        of elements
+    ){
+
+        const label =
+            element
+                .dataset
+                .label;
+
+
+        if(
+            element.type ===
+            "checkbox"
+        ){
+
+            if(
+                !element.checked
+            ){
+
+                error.textContent =
+                    "Onay kutusunu işaretlemelisin.";
+
+                return;
+            }
+
+
+            answers.push({
+
+                q:label,
+
+                a:"Kabul ediyorum"
+
+            });
+
+        }
+
+        else{
+
+            const value =
+                element.value.trim();
+
+
+            const optional =
+                label.includes(
+                    "İsteğe bağlı"
+                );
+
+
+            if(
+                !value &&
+                !optional
+            ){
+
+                error.textContent =
+                    "Lütfen zorunlu alanları doldur.";
+
+                element.focus();
+
+                return;
+            }
+
+
+            answers.push({
+
+                q:label,
+
+                a:value || "-"
+
+            });
+
+        }
+
+    }
+
+
+    error.textContent =
+        "Gönderiliyor...";
+
+
+    const form =
+        FORMS[formIndex];
+
+
+    const app = {
+
+        id:
+            Date.now(),
+
+        user:
+            me.username,
+
+        username:
+            me.username,
+
+        type:
+            form.n,
+
+        title:
+            form.t,
+
+        date:
+            new Date()
+            .toLocaleString(
+                "tr-TR"
+            ),
+
+        status:
+            "Beklemede",
+
+        answers,
+
+        msgs:[]
+
+    };
+
+
+    const success =
+        await putApp(
+            app
+        );
+
+
+    if(!success){
+
+        error.textContent =
+            "Başvuru gönderilemedi.";
+
+        return;
+    }
+
+
+    toast(
+        "✨ Başvurun başarıyla gönderildi!"
+    );
+
+
+    renderApply();
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function statusClass(status){
+
+    if(
+        status ===
+        "Kabul Edildi"
+    )
+        return "Kabul";
+
+
+    if(
+        status ===
+        "Reddedildi"
+    )
+        return "Red";
+
+
+    return "Beklemede";
+}
+
+
+/* =========================================================
+   MESSAGES HTML
+========================================================= */
+
+function messagesHTML(app){
+
+    return (
+        app.msgs || []
+    )
+    .map(
+        message => `
+
+            <div class="msg">
+
+                <small>
+                    ${esc(
+                        message.f
+                    )}
+                    ·
+                    ${esc(
+                        message.d
+                    )}
+                </small>
+
+                <br>
+
+                ${esc(
+                    message.t
+                )}
+
+            </div>
+
+        `
+    )
+    .join("");
+}
+
+
+/* =========================================================
+   ADMIN REQUESTS
+========================================================= */
+
+async function renderReq(){
+
+    if(
+        !me ||
+        me.role !== "admin"
+    ){
+
+        go("home");
+
+        return;
+    }
+
+
+    const box =
+        $("req-box");
+
+
+    const apps =
+        await getApps();
+
+
+    apps.sort(
+        (a,b) =>
+            Number(b.id) -
+            Number(a.id)
+    );
+
+
+    let html = `
+
+        <div class="hd">
+
+            <h1 class="t">
+                📥 Başvuru İstekleri
+            </h1>
+
+            <p class="sub">
+                Gelen başvuruları incele
+                ve yönet.
+            </p>
+
+            <button
+                class="btn s sm"
+                style="margin-top:15px"
+                onclick="renderReq()"
+            >
+                🔄 Yenile
+            </button>
+
+        </div>
+
+    `;
+
+
+    if(!apps.length){
+
+        html += `
+
+            <div
+                class="card"
+                style="text-align:center"
+            >
+
+                <p class="ds">
+                    Henüz başvuru yok.
+                </p>
+
+            </div>
+
+        `;
+
+        box.innerHTML =
+            html;
+
+        return;
+    }
+
+
+    html +=
+        apps
+        .map(
+            app => `
+
+                <div class="card app">
+
+                    <div class="app-top">
+
+                        <div>
+
+                            <b>
+                                ${esc(
+                                    app.title ||
+                                    app.type
+                                )}
+                            </b>
+
+                            <small>
+                                👤
+                                ${esc(
+                                    app.username ||
+                                    app.user
+                                )}
+
+                                ·
+
+                                ${esc(
+                                    app.date
+                                )}
+                            </small>
+
+                        </div>
+
+
+                        <span
+                            class="
+                                st
+                                ${
+                                    statusClass(
+                                        app.status
+                                    )
+                                }
+                            "
+                        >
+                            ${esc(
+                                app.status
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <button
+                            class="btn s sm"
+                            onclick="
+                                toggleAnswers(
+                                    ${app.id}
+                                )
+                            "
+                        >
+                            ${
+                                openApps[
+                                    app.id
+                                ]
+                                ? "Cevapları Gizle"
+                                : "Cevapları Gör"
+                            }
+                        </button>
+
+                    </div>
+
+
+                    ${
+                        openApps[app.id]
+                        ?
+
+                        `
+
+                        <div class="ans">
+
+                            ${
+                                (app.answers || [])
+                                .map(
+                                    answer => `
+
+                                        <i>
+                                            ${esc(
+                                                answer.q
+                                            )}
+                                        </i>
+
+                                        <div
+                                            style="
+                                                margin-bottom:12px;
+                                                white-space:pre-wrap
+                                            "
+                                        >
+                                            ${esc(
+                                                answer.a
+                                            )}
+                                        </div>
+
+                                    `
+                                )
+                                .join("")
+                            }
+
+                        </div>
+
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    ${messagesHTML(app)}
+
+
+                    <textarea
+                        rows="2"
+                        id="mg${app.id}"
+                        placeholder="Başvuru sahibine mesaj yaz..."
+                        style="margin-top:12px"
+                    ></textarea>
+
+
+                    <div class="row">
+
+                        <button
+                            class="btn sm"
+                            onclick="
+                                sendMsg(
+                                    ${app.id}
+                                )
+                            "
+                        >
+                            Mesaj Gönder
+                        </button>
+
+
+                        <button
+                            class="btn g sm"
+                            onclick="
+                                setSt(
+                                    ${app.id},
+                                    'Kabul Edildi'
+                                )
+                            "
+                        >
+                            ✓ Kabul Et
+                        </button>
+
+
+                        <button
+                            class="btn red sm"
+                            onclick="
+                                setSt(
+                                    ${app.id},
+                                    'Reddedildi'
+                                )
+                            "
+                        >
+                            ✕ Reddet
+                        </button>
+
+
+                        <button
+                            class="btn s sm"
+                            onclick="
+                                setSt(
+                                    ${app.id},
+                                    'Beklemede'
+                                )
+                            "
+                        >
+                            Beklemeye Al
+                        </button>
+
+
+                        <button
+                            class="btn s sm"
+                            onclick="
+                                delApp(
+                                    ${app.id}
+                                )
+                            "
+                        >
+                            🗑 Sil
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+
+    box.innerHTML =
+        html;
+
+
+    setTimeout(
+        revealElements,
+        50
+    );
+}
+
+
+/* =========================================================
+   TOGGLE ANSWERS
+========================================================= */
+
+function toggleAnswers(id){
+
+    openApps[id] =
+        !openApps[id];
+
+    renderReq();
+}
+
+
+/* =========================================================
+   UPDATE APPLICATION
+========================================================= */
+
+async function upd(
+    id,
+    callback
+){
+
+    const apps =
+        await getApps();
+
+
+    const app =
+        apps.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if(!app)
+        return;
+
+
+    callback(app);
+
+
+    await putApp(
+        app
+    );
+
+
+    renderReq();
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
+
+function sendMsg(id){
+
+    const textarea =
+        $("mg" + id);
+
+
+    if(!textarea)
+        return;
+
+
+    const text =
+        textarea
+            .value
+            .trim();
+
+
+    if(!text)
+        return;
+
+
+    upd(
+        id,
+        app => {
+
+            if(!app.msgs)
+                app.msgs = [];
+
+
+            app.msgs.push({
+
+                f:
+                    "Yönetici",
+
+                t:
+                    text,
+
+                d:
+                    new Date()
+                    .toLocaleString(
+                        "tr-TR"
+                    )
+
+            });
+
+        }
+    );
+
+
+    toast(
+        "Mesaj gönderildi."
+    );
+}
+
+
+/* =========================================================
+   STATUS + STAFF SYSTEM
+========================================================= */
+
+async function setSt(
+    id,
+    status
+){
+
+    const apps =
+        await getApps();
+
+
+    const app =
+        apps.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if(!app)
+        return;
+
+
+    app.status =
+        status;
+
+
+    await putApp(
+        app
+    );
+
+
+    /*
+        BAŞVURU KABUL EDİLDİYSE:
+
+        Örnek:
+
+        DrSontrix
+        Admin
+
+        veya
+
+        Oyuncu123
+        Rehber
+
+        otomatik Staff'a eklenir.
+    */
+
+    if(
+        status ===
+        "Kabul Edildi"
+    ){
+
+        await putStaff({
+
+            username:
+                app.username ||
+                app.user,
+
+            role:
+                app.type,
+
+            date:
+                new Date()
+                .toLocaleDateString(
+                    "tr-TR"
+                ),
+
+            applicationId:
+                app.id
+
+        });
+
+
+        toast(
+            "✓ Başvuru kabul edildi ve yetkililer listesine eklendi."
+        );
+
+    }
+
+
+    /*
+        Reddedildiyse / beklemeye alındıysa
+        staff listesinden kaldırılır.
+    */
+
+    else{
+
+        await removeStaff(
+            app.username ||
+            app.user
+        );
+
+
+        toast(
+            "Başvuru durumu: " +
+            status
+        );
+    }
+
+
+    renderReq();
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function delApp(id){
+
+    if(
+        !confirm(
+            "Bu başvuru silinsin mi?"
+        )
+    )
+        return;
+
+
+    await rmApp(
+        id
+    );
+
+
+    toast(
+        "Başvuru silindi."
+    );
+
+
+    renderReq();
+}
+
+
+/* =========================================================
+   STAFF RENDER
+========================================================= */
+
+async function renderStaff(){
+
+    const grid =
+        $("staff-grid");
+
+
+    grid.innerHTML = `
+
+        <div
+            class="card"
+            style="
+                grid-column:1/-1;
+                text-align:center
+            "
+        >
+            Yetkililer yükleniyor...
+        </div>
+
+    `;
+
+
+    const staff =
+        await getStaff();
+
+
+    /*
+        Kurucu her zaman görünür.
+    */
+
+    const members = [
+
+        {
+
+            username:
+                "DrSontrix",
+
+            role:
+                "Kurucu",
+
+            date:
+                "Sontlyx Network"
+
+        },
+
+        ...staff.filter(
+            member =>
+                member.username
+                !==
+                "DrSontrix"
+        )
+
+    ];
+
+
+    grid.innerHTML =
+        members
+        .map(
+            member => `
+
+                <div class="staff-card reveal">
+
+                    <img
+                        src="
+                            https://mc-heads.net/avatar/
+                            ${encodeURIComponent(
+                                member.username
+                            )}
+                            /110
+                        "
+                        class="avatar"
+                        alt="${esc(
+                            member.username
+                        )}"
+                        onerror="
+                            this.src=
+                            'https://mc-heads.net/avatar/MHF_Steve/110'
+                        "
+                    >
+
+
+                    <div class="staff-name">
+
+                        ${esc(
+                            member.username
+                        )}
+
+                    </div>
+
+
+                    <div class="staff-role">
+
+                        ${esc(
+                            member.role ||
+                            "Yetkili"
+                        )}
+
+                    </div>
+
+
+                    ${
+                        member.date
+                        ?
+
+                        `
+
+                        <div class="staff-date">
+
+                            ${esc(
+                                member.date
+                            )}
+
+                        </div>
+
+                        `
+
+                        :
+
+                        ""
+                    }
+
+                </div>
+
+            `
+        )
+        .join("");
+
+
+    setTimeout(
+        revealElements,
+        50
+    );
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const canvas =
+    $("particles");
+
+const ctx =
+    canvas.getContext(
+        "2d"
+    );
+
+
+let particles = [];
+
+
+function resizeCanvas(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+
+function createParticles(){
+
+    particles = [];
+
+
+    const count =
+        Math.min(
+            130,
+            Math.floor(
+                window.innerWidth /
+                10
+            )
+        );
+
+
+    for(
+        let i=0;
+        i<count;
+        i++
+    ){
+
+        particles.push({
+
+            x:
+                Math.random() *
+                canvas.width,
+
+            y:
+                Math.random() *
+                canvas.height,
+
+            r:
+                Math.random() *
+                1.5
+                +
+                .3,
+
+            vx:
+                (
+                    Math.random()
+                    -
+                    .5
+                )
+                *
+                .34,
+
+            vy:
+                (
+                    Math.random()
+                    -
+                    .5
+                )
+                *
+                .34,
+
+            a:
+                Math.random()
+                *
+                .45
+                +
+                .1
+
+        });
+
+    }
+
+}
+
+
+function drawParticles(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const maxDistance = 135;
+
+    for (const p of particles){
+        p.x += p.vx;
+        p.y += p.vy;
+        p.tw += .025;
+
+        if (p.x < -20) p.x = canvas.width + 20;
+        if (p.x > canvas.width + 20) p.x = -20;
+        if (p.y < -20) p.y = canvas.height + 20;
+        if (p.y > canvas.height + 20) p.y = -20;
+
+        const alpha = Math.max(.08, p.a + Math.sin(p.tw) * .08);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(125,211,252,${alpha})`;
+        ctx.shadowBlur = 14;
+        ctx.shadowColor = "rgba(56,189,248,.55)";
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+
+    // Yumuşak yıldız bağlantıları: kare blok yok, sadece ince enerji ağı.
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i];
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < maxDistance) {
+                const opacity = (1 - dist / maxDistance) * .10;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.strokeStyle = `rgba(56,189,248,${opacity})`;
+                ctx.lineWidth = .55;
+                ctx.stroke();
+            }
+        }
+    }
+
+    requestAnimationFrame(drawParticles);
+}
+
+
+resizeCanvas();
+
+createParticles();
+
+drawParticles();
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        resizeCanvas();
+
+        createParticles();
+
+    }
+);
+
+
+/* =========================================================
+   PREMIUM CURSOR — SMALL DOT + SOFT RING
+   3D card tilt is intentionally disabled so typing/clicking
+   never feels like the interface is moving underneath you.
+========================================================= */
+
+const cursorDot = $("cursorDot");
+const cursorRing = $("cursorRing");
+
+let cursorX = window.innerWidth / 2;
+let cursorY = window.innerHeight / 2;
+let ringX = cursorX;
+let ringY = cursorY;
+
+window.addEventListener("mousemove", event => {
+    cursorX = event.clientX;
+    cursorY = event.clientY;
+
+    if (cursorDot) {
+        cursorDot.style.left = cursorX + "px";
+        cursorDot.style.top = cursorY + "px";
+        cursorDot.style.opacity = "1";
+    }
+});
+
+function animateCursor(){
+    ringX += (cursorX - ringX) * .18;
+    ringY += (cursorY - ringY) * .18;
+
+    if (cursorRing) {
+        cursorRing.style.left = ringX + "px";
+        cursorRing.style.top = ringY + "px";
+        cursorRing.style.opacity = "1";
+    }
+
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+// Hover büyümesi sadece cursor'da olur; kartların kendisi ASLA tilt olmaz.
+document.addEventListener("mouseover", event => {
+    if (event.target.closest("a,button,input,textarea,select,label,.tab,.acc-h")) {
+        document.body.classList.add("cursor-hover");
+    }
+});
+
+document.addEventListener("mouseout", event => {
+    if (event.target.closest("a,button,input,textarea,select,label,.tab,.acc-h")) {
+        document.body.classList.remove("cursor-hover");
+    }
+});
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target
+                            .classList
+                            .add(
+                                "visible"
+                            );
+
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.08
+        }
+    );
+
+
+function revealElements(){
+
+
+    document
+        .querySelectorAll(
+            ".page.active .reveal"
+        )
+        .forEach(
+            element => {
+
+                observer.observe(
+                    element
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   RIPPLE BUTTON
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event => {
+
+        const button =
+            event.target.closest(
+                ".ripple-btn"
+            );
+
+
+        if(!button)
+            return;
+
+
+        const rect =
+            button.getBoundingClientRect();
+
+
+        const ripple =
+            document.createElement(
+                "span"
+            );
+
+
+        ripple.className =
+            "ripple";
+
+
+        ripple.style.left =
+            (
+                event.clientX -
+                rect.left
+            )
+            +
+            "px";
+
+
+        ripple.style.top =
+            (
+                event.clientY -
+                rect.top
+            )
+            +
+            "px";
+
+
+        button.appendChild(
+            ripple
+        );
+
+
+        setTimeout(
+            () =>
+                ripple.remove(),
+            700
+        );
+
+    }
+);
+
+
+/* =========================================================
+   HEADER SCROLL
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        $("hdr")
+            .classList
+            .toggle(
+                "scrolled",
+                window.scrollY > 30
+            );
+
+    }
+);
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+const yearNow = $("yearNow");
+if (yearNow) yearNow.textContent = new Date().getFullYear();
+
+window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(
+            () => {
+
+                $("loader")
+                    .classList
+                    .add(
+                        "hide"
+                    );
+
+
+                refresh();
+
+                renderStaff();
+
+                renderApply();
+
+                revealElements();
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeM();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
