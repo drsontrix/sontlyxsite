@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sontlyx Network - Minecraft Sunucusu</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05070e;--p:#38bdf8;--p2:#0ea5e9;--m:#94a3b8;--g:#34d399;--r:#ef4444;
+--c:url('netherite sword.ani'),url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><polygon points="12,4 8,8 12,12 16,8" fill="%2338bdf8"/></svg>') 16 16,auto}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg) url('arkaplan.png') center/cover fixed no-repeat;color:#fff;overflow-x:hidden;cursor:var(--c)}
+a,button,input,textarea,label,.acc-h{cursor:var(--c)}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at top,rgba(56,189,248,.1),transparent 40%);pointer-events:none}
+.reveal{animation:up .6s both}
+@keyframes up{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+header{display:flex;justify-content:space-between;align-items:center;padding:0 4%;background:rgba(5,7,14,.88);backdrop-filter:blur(15px);position:fixed;width:100%;top:0;z-index:1000;border-bottom:1px solid rgba(56,189,248,.15);height:80px;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--p);font-weight:800;font-size:1.25rem;white-space:nowrap}
+.logo img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(56,189,248,.6))}
+nav ul{display:flex;list-style:none;gap:4px;flex-wrap:wrap;justify-content:center}
+nav a{color:var(--m);text-decoration:none;font-weight:600;font-size:.85rem;padding:8px 12px;border-radius:10px;display:inline-block;transition:.3s}
+nav a:hover{color:var(--p);background:rgba(56,189,248,.1)}
+nav a.active{color:var(--bg);background:var(--p);box-shadow:0 0 20px rgba(56,189,248,.6)}
+.hr{display:flex;align-items:center;gap:10px}
+.up{display:none;align-items:center;gap:8px}.up.on{display:flex}
+.up img{width:38px;height:38px;border-radius:8px;border:2px solid var(--p)}
+.up span{font-weight:700;color:var(--p);font-size:.9rem}
+.hb{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.4);color:var(--p);padding:9px 16px;border-radius:10px;font-weight:600;font-size:.85rem;text-decoration:none;transition:.3s;white-space:nowrap;display:none}
+.hb.on{display:inline-flex}
+.hb:hover{background:var(--p);color:var(--bg)}
+.hb.g{border-color:rgba(52,211,153,.4);color:var(--g);background:rgba(52,211,153,.12)}
+.hb.g:hover{background:var(--g);color:var(--bg)}
+.hb.red{border-color:rgba(239,68,68,.4);color:var(--r);background:rgba(239,68,68,.1)}
+.hb.red:hover{background:var(--r);color:#fff}
+.page{display:none;padding-top:100px;min-height:100vh;position:relative;z-index:1;flex-direction:column;align-items:center}
+.page.active{display:flex}
+.hero{min-height:55vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px 20px;width:100%}
+.badge{background:rgba(56,189,248,.1);color:var(--p);padding:6px 18px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;border:1px solid rgba(56,189,248,.3)}
+h1.t,.hero h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:800;line-height:1.15;margin-bottom:18px;background:linear-gradient(135deg,#fff 30%,var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p,.sub{color:var(--m);font-size:1.1rem;max-width:650px;margin-bottom:30px;line-height:1.7}
+.btn{background:linear-gradient(135deg,var(--p),var(--p2));color:var(--bg);border:none;padding:13px 30px;font-size:1rem;font-weight:700;border-radius:12px;box-shadow:0 4px 20px rgba(56,189,248,.4);transition:.3s}
+.btn:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(56,189,248,.7)}
+.btn.g{background:linear-gradient(135deg,var(--g),#10b981)}
+.btn.s{background:rgba(56,189,248,.1);color:var(--p);border:1px solid rgba(56,189,248,.3);box-shadow:none}
+.btn.red{background:linear-gradient(135deg,#f87171,var(--r));color:#fff}
+.btn.sm{padding:8px 16px;font-size:.85rem}
+.card{background:rgba(15,23,42,.85);border:1px solid rgba(56,189,248,.28);border-radius:20px;padding:28px;backdrop-filter:blur(15px);box-shadow:0 15px 35px rgba(0,0,0,.5);transition:.3s}
+.card:hover{border-color:var(--p)}
+.server-card{width:min(90%,850px);display:flex;justify-content:space-between;align-items:center;margin:30px auto 60px;gap:15px;flex-wrap:wrap}
+.server-card h3{font-size:1.2rem;margin-bottom:5px}.server-card p{color:var(--m)}
+.status{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--r);background:rgba(239,68,68,.08);padding:6px 14px;border-radius:20px;border:1px solid rgba(239,68,68,.3)}
+.dot{width:9px;height:9px;background:var(--r);border-radius:50%;box-shadow:0 0 12px var(--r)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px;width:min(95%,1200px);margin:0 auto 80px}
+.grid .card{text-align:center;display:flex;flex-direction:column;gap:12px}
+.grid .card:hover{transform:translateY(-10px)}
+.big{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,var(--p),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.big.g{background:linear-gradient(135deg,var(--g),#10b981);-webkit-background-clip:text}
+.nm{font-size:1.7rem;font-weight:800;color:var(--p)}.ds{color:var(--m);font-size:.9rem}
+.grid .btn{margin-top:auto;width:100%}
+.wrap{width:min(92%,900px);margin:0 auto 80px}
+.hd{text-align:center;margin-bottom:35px;padding:0 15px}
+.avatar{width:90px;height:90px;border-radius:50%;border:2px solid var(--p);margin-bottom:15px}
+.role{display:inline-block;background:rgba(56,189,248,.15);color:var(--p);padding:5px 14px;border-radius:12px;font-size:.85rem;font-weight:600;border:1px solid rgba(56,189,248,.3)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+.modal.on{display:flex}
+.modal .card{max-width:500px;width:90%;text-align:center}
+.modal .acts{display:flex;gap:12px;margin-top:25px}.modal .btn{flex:1}
+.auth{width:min(92vw,1000px);display:grid;grid-template-columns:1.2fr .8fr;padding:0;overflow:hidden;margin-bottom:40px}
+.auth-f{padding:35px}
+.auth-s{display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(7,11,20,.7);padding:30px;text-align:center}
+.auth-s img{width:130px;filter:drop-shadow(0 0 25px rgba(56,189,248,.4))}
+.tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:1px solid rgba(56,189,248,.15);flex-wrap:wrap}
+.tab{background:none;border:none;color:var(--m);padding:10px 12px;font-weight:700;font-size:.85rem;border-bottom:2px solid transparent}
+.tab.on{color:var(--p);border-color:var(--p)}
+.fm{display:none}.fm.on{display:block}
+label{display:block;color:var(--m);font-size:.82rem;font-weight:600;margin:14px 0 7px}
+input,textarea{width:100%;background:rgba(15,23,42,.75);border:1px solid rgba(56,189,248,.2);padding:12px 14px;border-radius:12px;color:#fff;font-size:.95rem;outline:none;resize:vertical}
+input:focus,textarea:focus{border-color:var(--p)}
+input[type=checkbox]{width:auto;margin-right:8px;vertical-align:middle}
+.fm .btn{margin-top:22px;width:100%}
+.err{color:var(--r);font-size:.85rem;margin-top:10px;min-height:18px}
+.back{position:absolute;top:25px;right:30px;z-index:5}
+.acc{margin-bottom:14px;padding:0;overflow:hidden}
+.acc-h{width:100%;background:none;border:none;color:#fff;text-align:left;padding:20px 24px;font-size:1.05rem;font-weight:700;display:flex;justify-content:space-between;gap:10px}
+.acc-h:hover{color:var(--p)}
+.acc-b{display:none;padding:0 24px 24px}.acc-b.on{display:block}
+.acc-b h4{color:var(--p);margin:22px 0 4px}
+.st{font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:12px;white-space:nowrap}
+.st.Beklemede{background:rgba(250,204,21,.15);color:#facc15}
+.st.Kabul{background:rgba(52,211,153,.15);color:var(--g)}
+.st.Red{background:rgba(239,68,68,.15);color:var(--r)}
+.app{margin-bottom:14px}
+.app-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.app-top b{font-size:1.02rem}.app-top small{color:var(--m);display:block}
+.ans{background:rgba(5,7,14,.6);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.88rem}
+.ans i{color:var(--p);font-style:normal;font-weight:600;display:block}
+.msg{margin-top:8px;padding:9px 13px;border-radius:12px;background:rgba(56,189,248,.1);font-size:.88rem}
+.msg small{color:var(--m)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.toast{position:fixed;bottom:30px;right:30px;background:rgba(15,23,42,.95);border:1px solid var(--p);padding:14px 24px;border-radius:12px;font-weight:600;display:none;z-index:3000}
+@media(max-width:900px){header{height:auto;flex-direction:column;padding:10px;position:relative}.page{padding-top:20px}.auth{grid-template-columns:1fr}.auth-s{display:none}.back{top:10px;right:10px}}
+</style>
+</head>
+<body>
+<header id="hdr">
+<a href="#" class="logo" onclick="go('home',event)"><img src="logo.png" alt="Logo">SONTLYX NETWORK</a>
+<nav><ul>
+<li><a href="#" id="n-home" class="active" onclick="go('home',event)">Anasayfa</a></li>
+<li><a href="#" id="n-store" onclick="go('store',event)">Mağaza</a></li>
+<li><a href="#" id="n-credit" onclick="go('credit',event)">Kredi Al</a></li>
+<li><a href="#" id="n-support" onclick="go('support',event)">Destek</a></li>
+<li><a href="#" id="n-staff" onclick="go('staff',event)">Yetkililer</a></li>
+<li><a href="#" id="n-apply" onclick="go('apply',event)">Yetkili Başvuruları</a></li>
+<li id="li-req" style="display:none"><a href="#" id="n-requests" onclick="go('requests',event)">Başvuru İstekleri</a></li>
+</ul></nav>
+<div class="hr">
+<div class="up" id="up"><img id="av" src="" alt=""><span id="un"></span></div>
+<button class="hb g" id="cb" onclick="credPanel()">💚 <span id="ca">0</span>&nbsp;Kredi</button>
+<a href="#" class="hb on" id="lb" onclick="tab('login');go('auth',event)">→ Giriş Yap</a>
+<a href="#" class="hb red" id="ob" onclick="logout(event)">← Çıkış Yap</a>
+</div>
+</header>
+
+<div id="p-home" class="page active">
+<section class="hero reveal">
+<div class="badge">✨ TÜRKİYE'NİN EN İYİ OYUN DENEYİMİ</div>
+<h1>Sontlyx Network'e Hoş Geldiniz!</h1>
+<p>En kaliteli survival ve macera deneyimi için IP adresini kopyala ve aramıza katıl.</p>
+<button class="btn" onclick="copyIP()">Şimdi Oyna</button>
+</section>
+<div class="card server-card reveal">
+<div><h3>OYUNA DAHİL OLMA ZAMANI!</h3><p>Sunucu Adresi: <b style="color:var(--p)">sontlyxnw.com</b></p></div>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<div class="status"><span class="dot"></span>Sunucu Kapalı</div>
+<button class="btn sm" onclick="copyIP()">IP Kopyala</button></div>
+</div>
+</div>
+
+<div id="p-store" class="page">
+<div class="hd"><h1 class="t">🛍️ Mağaza</h1><p class="sub">Sunucumuzu destekle ve özel avantajlar kazan!</p></div>
+<div class="grid" id="vip-grid"></div>
+</div>
+
+<div id="p-credit" class="page">
+<div class="hd"><h1 class="t">💚 Kredi Al</h1><p class="sub">Sunucumuzu destekle ve kredi satın al!</p></div>
+<div class="grid" id="cr-grid"></div>
+</div>
+
+<div id="p-support" class="page">
+<div class="hd"><h1 class="t">💬 Destek Merkezi</h1><p class="sub">Sorunlarınız için biz buradayız!</p></div>
+<div class="grid" style="margin-bottom:30px">
+<div class="card"><div style="font-size:3rem">🎮</div><h3>Oyun Sorunları</h3><p class="ds">Sunucuya bağlanma, lag ve teknik sorunlar için destek alın.</p></div>
+<div class="card"><div style="font-size:3rem">💳</div><h3>Ödeme &amp; Hesap</h3><p class="ds">VIP satın alma, hesap yönetimi ve para iadesi konularında yardım alın.</p></div>
+<div class="card"><div style="font-size:3rem">⚙️</div><h3>Genel Sorular</h3><p class="ds">Sunucu kuralları, özellikler ve diğer soruların cevaplarını bulun.</p></div>
+</div>
+<div class="card wrap" style="text-align:center;border-color:rgba(88,101,242,.5)">
+<h3>🌟 Discord'a Katıl</h3><p class="ds" style="margin:12px 0 22px">Destek ile iletişime geçmek için Discord sunucumuza gelebilirsin.</p>
+<a href="https://discord.gg/3WKDEJ2d4a" target="_blank" class="btn" style="background:#5865f2;color:#fff;text-decoration:none;display:inline-block">🔗 Discord'a Git</a>
+</div>
+</div>
+
+<div id="p-staff" class="page">
+<div class="hd"><h1 class="t">Sunucu Yönetimi</h1><p class="sub">Sontlyx Network ekibi ile tanışın.</p></div>
+<div class="card" style="text-align:center;width:280px"><img src="https://mc-heads.net/avatar/DrSontrix/90" class="avatar" alt=""><h3>DrSontrix</h3><br><span class="role">Sunucu Kurucusu</span></div>
+</div>
+
+<div id="p-apply" class="page"><div class="wrap" id="apply-box"></div></div>
+<div id="p-requests" class="page"><div class="wrap" id="req-box"></div></div>
+
+<div id="p-auth" class="page">
+<a href="#" class="hb red on back" style="color:var(--p);border-color:rgba(56,189,248,.4);background:rgba(15,23,42,.8)" onclick="go('home',event)">← Geri Dön</a>
+<div class="card auth reveal">
+<div class="auth-f">
+<div class="tabs">
+<button class="tab on" id="t-login" onclick="tab('login')">GİRİŞ YAP</button>
+<button class="tab" id="t-register" onclick="tab('register')">KAYIT OL</button>
+<button class="tab" id="t-admin" onclick="tab('admin')">YÖNETİCİ OLARAK GİRİŞ YAP</button>
+</div>
+<div class="fm on" id="f-login">
+<label>Kullanıcı Adı</label><input id="l-u" placeholder="Kullanıcı Adı">
+<label>Şifre</label><input id="l-p" type="password" placeholder="••••••••">
+<button class="btn" onclick="login()">Giriş Yap</button><div class="err" id="e-login"></div>
+</div>
+<div class="fm" id="f-register">
+<label>Kullanıcı Adı (Minecraft Nick)</label><input id="r-u" placeholder="Kullanıcı Adı">
+<label>E-Posta</label><input id="r-e" type="email" placeholder="E-Posta">
+<label>Şifre</label><input id="r-p" type="password" placeholder="••••••••">
+<button class="btn" onclick="register()">Kayıt Ol</button><div class="err" id="e-register"></div>
+</div>
+<div class="fm" id="f-admin">
+<label>Yönetici Kullanıcı Adı</label><input id="a-u" placeholder="Kullanıcı Adı">
+<label>Yönetici Şifresi</label><input id="a-p" type="password" placeholder="••••••••">
+<button class="btn" onclick="adminLogin()">Yönetici Girişi</button><div class="err" id="e-admin"></div>
+</div>
+</div>
+<div class="auth-s"><img src="logo.png" alt=""><h2 style="margin-top:15px">Sontlyx Network</h2><p class="ds">MINECRAFT SUNUCUSU</p></div>
+</div>
+</div>
+
+<div id="modal" class="modal"><div class="card">
+<h2 id="m-t" style="color:var(--p)"></h2><div class="big" id="m-b" style="margin:12px 0"></div><p class="ds" id="m-s"></p>
+<div class="acts"><button class="btn" id="m-ok">Tamam</button><button class="btn s" onclick="closeM()">Kapat</button></div>
+</div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const L=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+const S=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let me=L('session');
+let openApps={};
+
+/* ---------- Başvuru formları ---------- */
+const P=['i:Adınız ve Soyadınız (İsteğe bağlı):','i:Oyuncu Adınız (Minecraft Nick):','i:Yaşınız:','i:Günlük Aktiflik Süreniz (Hafta içi / Hafta sonu):','i:Discord Kullanıcı Adınız (Örnek: isim#0000):'];
+const P2=[P[0],P[1],P[2],'i:Discord Kullanıcı Adınız:'];
+const FORMS=[
+{t:'Minecraft Sunucusu Admin Başvuru Formu',n:'Admin',s:[
+['1. Kişisel ve İletişim Bilgileri',P],
+['2. Deneyim ve Yetkinlikler',['Daha önce başka bir sunucuda yetkili oldunuz mu? Olduysanız hangi görevlerde bulundunuz ve ayrılma sebebiniz nedir?','i:Minecraft komut bilginizi 1 ile 10 arasında puanlayınız (WorldEdit, WorldGuard, Essentials vb.):','i:Yetkili olduğunuz süre boyunca sunucuya haftalık ortalama kaç saat katkı sağlayabilirsiniz?']],
+['3. Senaryo ve Durum Soruları',['Senaryo 1: Sunucuda bir oyuncunun hile kullandığından şüpheleniyorsunuz ancak elinizde kesin bir kanıt yok. Nasıl bir yol izlersiniz?','Senaryo 2: Oyunculardan biri size hakaret ediyor ve küfür ediyor. Bu durumda kişisel tavrınız ve alacağınız ceza ne olurdu?','Senaryo 3: Tanıdığınız veya arkadaşınız olan bir oyuncunun kural çiğnediğini gördünüz. Ne yaparsınız?']],
+['4. Son Değerlendirme',['Neden sizi bu ekibe dahil etmeliyiz? Sizi diğer adaylardan ayıran özellikler nelerdir?','Ekip içerisindeki diğer yetkililerle veya oyuncularla yaşayabileceğiniz olası bir anlaşmazlığı nasıl çözersiniz?','c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve kurallara uyacağınızı kabul ediyor musunuz?']]]},
+{t:'Minecraft Sunucusu Rehber Başvuru Formu',n:'Rehber',s:[
+['1. Kişisel ve İletişim Bilgileri',P],
+['2. Deneyim ve İletişim',['Daha önce başka bir sunucuda rehberlik veya benzeri bir görev yaptınız mı? Yaptıysanız hangi sunucularda bulundunuz?','Oyuncularla iletişim kurarken ve sorunları çözerken kendinize 10 üzerinden kaç puan verirsiniz? Neden?','i:Mikrofonunuz var mı ve sesli iletişim kurabiliyor musunuz?']],
+['3. Senaryo ve Durum Soruları',['Senaryo 1: Yeni başlayan ve sunucunun komutlarını bilmeyen bir oyuncu sürekli chat üzerinden "Para nasıl kazanılır?" veya "Arsa nasıl alırım?" diye soruyor. Oyuncuya nasıl yaklaşır ve yardımcı olursunuz?','Senaryo 2: Sunucuda oyuncunun biri size veya diğer oyunculara hakaret ediyor, sinirinizi bozmaya çalışıyor. Bu durumda rehber olarak tavrınız ne olurdu?','Senaryo 3: Bir oyuncu hile kullandığını iddia ediyor ve sizden yardım istiyor. Rehber olarak yetkiniz dışındaki bu durumda ne yaparsınız?']],
+['4. Son Değerlendirme',['Oyunculara neden sabırlı ve adil yaklaşabileceğinizi düşünüyorsunuz? Sizi neden rehber olarak seçmeliyiz?','c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve sunucu kurallarına uyacağınızı kabul ediyor musunuz?']]]},
+{t:'Minecraft Sunucusu AntiCheat Yetkilisi Başvuru Formu',n:'AntiCheat',s:[
+['1. Kişisel ve İletişim Bilgileri',P],
+['2. Teknik Bilgi ve Deneyim',['Daha önce hangi sunucularda AntiCheat yetkilisi veya SS (Screen Share) moderatörü olarak görev yaptınız?','Hangi hile koruma eklentilerini (AntiCheat pluginlerini) daha önce incelediniz veya yapılandırdınız? (Örn: Vulcan, Grim, Spartan vb.)','i:Minecraft istemcisindeki modifiye edilmiş sürümleri (Lunar Client, Badlion, Forge modları vb.) ve bunlardaki hile izlerini ayırt etme bilginizi 1 ile 10 arasında puanlayınız.']],
+['3. Senaryo ve Teknik Durum Soruları',['Senaryo 1: Oyuncunun biri Reach (erişim mesafesi) veya Velocity (geri tepmeme) hilesi kullandığından şüpheleniyorsunuz. Oyuncuyu izlerken dikkat edeceğiniz ilk teknik detaylar nelerdir?','Senaryo 2: Şüpheli bir oyuncuyu ekran açmaya (Screen Share) davet ettiniz ve kabul etti. AnyDesk/Supremo gibi araçlarla inceleme yaparken bilgisayarda ilk baktığınız gizli dosyalar veya log konumları neresidir?','Senaryo 3: Oyuncu ekran açma incelemesi sırasında oyunu kapatır, internetini keser veya bilgisayarı yeniden başlatırsa kural gereği vereceğiniz karar ne olur?']],
+['4. Son Değerlendirme',['Hile koruma loglarını (Alerts/Console) okuma ve false-positive (yanlış alarm) durumlarını ayırt etme konusunda ne kadar tecrübelisiniz?','Sizi diğer adaylardan ayıran teknik yetkinlikleriniz nelerdir? Neden bu ekibe katılmalısınız?','c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve yetkinizi kötüye kullanmayacağınızı kabul ediyor musunuz?']]]},
+{t:'Minecraft Sunucusu Media (İçerik Üreticisi) Başvuru Formu',n:'Media',s:[
+['Kişisel ve İletişim Bilgileri',P2],
+['Sosyal Medya ve Kanal Bilgileri',['i:İçerik ürettiğiniz platformlar hangileridir? (YouTube, TikTok, Twitch, Instagram vb.)','i:Kanalınızın/Sayfanızın bağlantısı (Link):','i:Abone veya takipçi sayınız nedir?','i:Ortalama izlenme veya etkileşim oranlarınız (izlenme, beğeni) hangi seviyededir?']],
+['Deneyim ve İçerik Planı',['Daha önce başka sunucular için tanıtım videosu veya yayını yaptınız mı? Yaptıysanız örnek bir bağlantı paylaşabilir misiniz?','Sunucumuz için ne tür içerikler üretebilirsiniz? (Örn: YouTube tanıtım videosu, TikTok/Shorts kesitleri, Canlı yayınlar)','i:Sunucumuzda oynamak ve içerik üretmek için haftalık ayırabileceğiniz süre ne kadardır?']],
+['Son Değerlendirme',['Sunucumuza oyuncu çekmek ve tanıtmak için kendi özgün stratejiniz var mı? Varsa kısaca anlatınız.','c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve içerik sözleşmesine uyacağınızı kabul ediyor musunuz?']]]},
+{t:'Minecraft Sunucusu Builder (Mimar) Başvuru Formu',n:'Builder',s:[
+['Kişisel ve İletişim Bilgileri',P2],
+['Deneyim ve Yetkinlikler',['Daha önce hangi sunucularda Mimar (Builder) olarak görev yaptınız?','Mimaride ne kadar süredir tecrübeniz var ve hangi tarzları (Medieval, Modern, Fantasy, Sci-Fi vb.) daha iyi inşa edersiniz?','i:Dünya düzenleme ve inşa eklentilerini (WorldEdit, VoxelSniper vb.) kullanma bilginizi 1 ile 10 arasında puanlayınız.']],
+['Portfolyo ve Yetenek Gösterimi',['Daha önce yaptığınız yapıların fotoğrafları veya portfolyo bağlantınız var mı? (Lütfen Imgur, Google Drive veya Discord üzerinden ekran görüntülerini ekleyin.)','Boş bir alanda sıfırdan bir Spawn veya Orman Warpı tasarlamanız gerekirse sürece nereden başlarsınız?']],
+['Çalışma Düzeni ve Son Değerlendirme',['i:Sunucu için haftalık kaç saat aktif olarak yapı üretebilirsiniz?','Verilen bir projeyi (örneğin etkinlik alanı veya yenilenmesi gereken bir harita) belirlenen sürede tamamlayabilir misiniz?','c:Yukarıdaki bilgilerin tamamen doğru olduğunu ve kendi çalışmalarınızı göndereceğinizi kabul ediyor musunuz?']]]}
+];
+
+/* ---------- Genel ---------- */
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+function copyIP(){const ip='sontlyxnw.com';(navigator.clipboard?navigator.clipboard.writeText(ip):Promise.reject()).catch(()=>{const x=document.createElement('textarea');x.value=ip;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()});toast('✨ Başarılı! Sunucu adresi kopyalandı.')}
+function go(p,e){if(e)e.preventDefault();
+if(p==='requests'&&!(me&&me.role==='admin'))p='home';
+$('hdr').style.display=p==='auth'?'none':'flex';
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+$('p-'+p).classList.add('active');
+document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+if($('n-'+p))$('n-'+p).classList.add('active');
+if(p==='apply')renderApply();if(p==='requests')renderReq();
+scrollTo({top:0,behavior:'smooth'})}
+function openM(t,b,s,fn){$('m-t').textContent=t;$('m-b').textContent=b;$('m-s').textContent=s;$('m-ok').onclick=()=>{closeM();fn&&fn()};$('modal').classList.add('on')}
+function closeM(){$('modal').classList.remove('on')}
+$('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeM()});
+function credPanel(){openM('💚 Kredi Paneli',me.credits||0,'Toplam Kredi',()=>go('credit'))}
+
+/* Mağaza */
+$('vip-grid').innerHTML=[['VIP','Temel avantajlar ve özel cihazlar',10],['VIP+','Gelişmiş özellikler ve komutlar',20],['VIP++','Premium üyelik tüm avantajlarla',30],['VIP+++','Ultra premium paket',45],['SontlyxVip','Son seviye özel üyelik',60]]
+.map(v=>`<div class="card"><div class="nm">${v[0]}</div><div class="ds">${v[1]}</div><div class="big">${v[2]}</div><div class="ds">Kredi</div><button class="btn" onclick="openM('${v[0]}','${v[2]} Kredi','',()=>toast('Ödeme sayfasına yönlendiriliyorsunuz!'))">Satın Al</button></div>`).join('');
+$('cr-grid').innerHTML=[10,40,60,100].map(c=>`<div class="card" style="border-color:rgba(52,211,153,.3)"><div class="big g">${c}</div><div class="ds">Kredi</div><div class="nm" style="color:var(--g);font-size:1.4rem">₺${c} TL</div><button class="btn g" onclick="openM('Kredi Satın Al','${c} Kredi','₺${c} TL',()=>toast('Ödeme sayfasına yönlendiriliyorsunuz!'))">Satın Al</button></div>`).join('');
+
+/* ---------- Giriş sistemi ---------- */
+function refresh(){
+const on=!!me;
+$('up').classList.toggle('on',on);$('cb').classList.toggle('on',on&&me.role!=='admin');
+$('ob').classList.toggle('on',on);$('lb').classList.toggle('on',!on);
+$('li-req').style.display=on&&me.role==='admin'?'':'none';
+if(on){$('un').textContent=me.username+(me.role==='admin'?' (Yönetici)':'');$('av').src='https://mc-heads.net/avatar/'+encodeURIComponent(me.username)+'/45';$('ca').textContent=me.credits||0}}
+function setSession(s){me=s;S('session',s);refresh()}
+function tab(n){['login','register','admin'].forEach(x=>{$('t-'+x).classList.toggle('on',x===n);$('f-'+x).classList.toggle('on',x===n);$('e-'+x).textContent=''})}
+function register(){const u=$('r-u').value.trim(),e=$('r-e').value.trim(),p=$('r-p').value,er=$('e-register');
+if(!u||!e||!p)return er.textContent='Tüm alanları doldurun.';
+if(!/^\w{3,16}$/.test(u))return er.textContent='Kullanıcı adı 3-16 karakter (harf, rakam, _) olmalı.';
+if(p.length<4)return er.textContent='Şifre en az 4 karakter olmalı.';
+const us=L('users')||[];
+if(u.toLowerCase()==='sontlyx'||us.some(x=>x.u.toLowerCase()===u.toLowerCase()))return er.textContent='Bu kullanıcı adı zaten alınmış.';
+us.push({u,e,p,credits:0});S('users',us);
+setSession({username:u,role:'user',credits:0});toast('Kayıt başarılı!');go('home')}
+function login(){const u=$('l-u').value.trim(),p=$('l-p').value;
+const x=(L('users')||[]).find(y=>y.u.toLowerCase()===u.toLowerCase()&&y.p===p);
+if(!x)return $('e-login').textContent='Kullanıcı adı veya şifre hatalı.';
+setSession({username:x.u,role:'user',credits:x.credits||0});toast('Hoş geldin, '+x.u+'!');go('home')}
+function adminLogin(){if($('a-u').value.trim()==='Sontlyx'&&$('a-p').value==='ahmet@123'){setSession({username:'Sontlyx',role:'admin',credits:0});toast('Yönetici olarak giriş yapıldı.');go('home')}else $('e-admin').textContent='Yönetici bilgileri hatalı.'}
+function logout(e){if(e)e.preventDefault();localStorage.removeItem('session');me=null;refresh();go('home');toast('Çıkış yapıldı.')}
+
+/* ---------- Başvuru sayfası ---------- */
+const stCls=s=>s==='Beklemede'?'Beklemede':s==='Kabul Edildi'?'Kabul':'Red';
+const msgsHtml=a=>(a.msgs||[]).map(m=>`<div class="msg"><small>${esc(m.f)} · ${esc(m.d)}</small><br>${esc(m.t)}</div>`).join('');
+function renderApply(){const box=$('apply-box');
+let h='<div class="hd"><h1 class="t">📝 Yetkili Başvuruları</h1><p class="sub" style="margin:0 auto">Bir form seçip soruları doldurarak başvurabilirsin.</p></div>';
+if(!me){box.innerHTML=h+'<div class="card" style="text-align:center"><h3>🔒 Giriş Gerekli</h3><p class="ds" style="margin:12px 0 20px">Başvuru yapmak için önce giriş yapmalısın.</p><button class="btn" onclick="tab(\'login\');go(\'auth\')">Giriş Yap / Kayıt Ol</button></div>';return}
+FORMS.forEach((f,fi)=>{let q=0;
+h+=`<div class="card acc"><button class="acc-h" onclick="$('fb${fi}').classList.toggle('on')"><span>📋 ${f.t}</span><span>▾</span></button><div class="acc-b" id="fb${fi}">`;
+f.s.forEach(s=>{h+=`<h4>${s[0]}</h4>`;s[1].forEach(x=>{
+const c=x.startsWith('c:'),i=x.startsWith('i:'),lb=(c||i)?x.slice(2):x,id=`q${fi}_${q++}`;
+h+=c?`<label><input type="checkbox" id="${id}" data-f="${fi}" data-l="${esc(lb)}">${esc(lb)}</label>`
+:`<label>${esc(lb)}</label>`+(i?`<input id="${id}" data-f="${fi}" data-l="${esc(lb)}">`:`<textarea rows="3" id="${id}" data-f="${fi}" data-l="${esc(lb)}"></textarea>`)})});
+h+=`<button class="btn" style="margin-top:22px" onclick="submitApp(${fi})">Başvuruyu Gönder</button><div class="err" id="ee${fi}"></div></div></div>`});
+const mine=(L('apps')||[]).filter(a=>a.user===me.username).reverse();
+h+='<h2 style="margin:40px 0 15px">📨 Başvurularım</h2>';
+h+=mine.length?mine.map(a=>`<div class="card app"><div class="app-top"><div><b>${esc(a.type)} Başvurusu</b><small>${esc(a.date)}</small></div><span class="st ${stCls(a.status)}">${a.status}</span></div>${msgsHtml(a)}</div>`).join(''):'<p class="ds">Henüz başvurun yok.</p>';
+box.innerHTML=h}
+function submitApp(fi){const els=[...document.querySelectorAll(`[data-f="${fi}"]`)],er=$('ee'+fi);let ans=[];
+for(const e of els){const lb=e.dataset.l;
+if(e.type==='checkbox'){if(!e.checked)return er.textContent='Lütfen onay kutusunu işaretleyin.';ans.push({q:lb,a:'Kabul ediyorum'})}
+else{const v=e.value.trim();if(!v&&!lb.includes('İsteğe bağlı'))return er.textContent='Lütfen tüm zorunlu soruları doldurun.';ans.push({q:lb,a:v||'-'})}}
+const apps=L('apps')||[];
+apps.push({id:Date.now(),user:me.username,type:FORMS[fi].n,title:FORMS[fi].t,date:new Date().toLocaleString('tr-TR'),status:'Beklemede',answers:ans,msgs:[]});
+S('apps',apps);toast('Başvurun gönderildi!');renderApply()}
+
+/* ---------- Yönetici: başvuru istekleri ---------- */
+function renderReq(){const box=$('req-box');
+const apps=(L('apps')||[]).slice().reverse();
+let h='<div class="hd"><h1 class="t">📥 Başvuru İstekleri</h1><p class="sub" style="margin:0 auto">Gelen başvuruları incele, durumunu belirle ve mesaj gönder.</p></div>';
+h+=apps.length?apps.map(a=>`<div class="card app"><div class="app-top"><div><b>${esc(a.title)}</b><small>👤 ${esc(a.user)} · ${esc(a.date)}</small></div><span class="st ${stCls(a.status)}">${a.status}</span></div>
+<div class="row"><button class="btn s sm" onclick="openApps[${a.id}]=!openApps[${a.id}];renderReq()">${openApps[a.id]?'Cevapları Gizle':'Cevapları Gör'}</button></div>
+${openApps[a.id]?`<div class="ans">${a.answers.map(x=>`<i>${esc(x.q)}</i><div style="margin-bottom:10px;white-space:pre-wrap">${esc(x.a)}</div>`).join('')}</div>`:''}
+${msgsHtml(a)}
+<textarea rows="2" id="mg${a.id}" placeholder="Başvuru sahibine mesaj yaz..." style="margin-top:12px"></textarea>
+<div class="row"><button class="btn sm" onclick="sendMsg(${a.id})">Mesaj Gönder</button>
+<button class="btn g sm" onclick="setSt(${a.id},'Kabul Edildi')">Kabul Et</button>
+<button class="btn red sm" onclick="setSt(${a.id},'Reddedildi')">Reddet</button>
+<button class="btn s sm" onclick="setSt(${a.id},'Beklemede')">Beklemeye Al</button>
+<button class="btn s sm" onclick="delApp(${a.id})">Sil</button></div></div>`).join(''):'<div class="card" style="text-align:center"><p class="ds">Henüz başvuru yok.</p></div>';
+box.innerHTML=h}
+function upd(id,fn){const a=L('apps')||[];const x=a.find(y=>y.id===id);if(x)fn(x,a);S('apps',a);renderReq()}
+function sendMsg(id){const t=$('mg'+id).value.trim();if(!t)return;upd(id,x=>x.msgs.push({f:'Yönetici',t,d:new Date().toLocaleString('tr-TR')}));toast('Mesaj gönderildi.')}
+function setSt(id,s){upd(id,x=>x.status=s);toast('Durum: '+s)}
+function delApp(id){if(!confirm('Bu başvuru silinsin mi?'))return;const a=(L('apps')||[]).filter(x=>x.id!==id);S('apps',a);renderReq()}
+
+refresh();
+</script>
+</body>
+</html>
